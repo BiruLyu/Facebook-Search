@@ -1,0 +1,28 @@
+@media (min-width: 768px) {
+  .navbar-nav.navbar-center {
+    #position: absolute;
+    #left: 50%;
+    #transform: translatex(-50%);
+  }
+}
+
+@media (min-width: 768px) {
+    .navbar-nav .navbar-center{
+        #position: absolute;
+        #left: 40%;
+        #top: 7px;
+    }
+    .navbar-nav .navbar-center{
+        #position: absolute;
+        #left: 50%;
+        #transform: translatex(-50%);
+    }
+
+    #input-group{
+        position: absolute;
+        left: 40%;
+        top: 7px;;
+        transform: translatex(-50%);
+
+    }
+}
