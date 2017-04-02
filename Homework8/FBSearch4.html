@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="FBSearch.css" type="text/css" />
+    <script type="text/javascript" src="FBSearch.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/additional-methods.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.light.js"></script>-->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body>
+    <div class="container" ng-app="myApp" ng-controller="namesCtrl">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header"> <a class="navbar-brand" href="#">FB Search</a> </div>
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group">
+                                <input type="text" ng-model="keyword" class="form-control" placeholder="Search" name="keyword">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="Search()" type="submit"> <i class="glyphicon glyphicon-search"></i> </button>
+                                </div>
+                            </div>
+                            <button id="ClearButton" type="Reset" class="btn btn-default btn-primary">Clear</button>
+                        </form>
+                        
+                    </div>
+                </nav>
+            
+                
+                <div class="tabbable"> <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li ng-repeat="tab in tabs" 
+                            ng-class="{active:isActiveTab(tab.url)}" ><a ng-click="onClickTab(tab)">{{tab.title}}</a></li>
+                    </ul> 
+                </div>
+                
+                <div id="mainView">
+                    <div ng-include="currentTab">ppppp </div>
+                </div>
+                
+                
+                
+                
+        <!-- Example page partials -->
+        <script type="text/ng-template" id="page-Users.html">
+            <div id="page-Users" class="pages">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Profile photo</th>
+                        <th>Name</th>
+                        <th>Favorite</th>
+                        <th>Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in users">
+                        <td>{{ $index + 1 }}</td>
+                        <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
+                        <td>{{ x.name }}</td>
+                        <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
+                        <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                        <td>{{ x.id }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </script>        
+        <script type="text/ng-template" id="page-Pages.html">
+            <div id="page-Pages" class="pages">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Profile photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in pages">
+                                <td>{{ $index + 1 }}</td>
+                                <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
+                                <td>{{ x.name }}</td>
+                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td>{{ x.id }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Events.html">
+            <div id="page-Events" class="pages">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Profile photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in events">
+                                <td>{{ $index + 1 }}</td>
+                                <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
+                                <td>{{ x.name }}</td>
+                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td>{{ x.id }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Places.html">
+            <div id="page-Places" class="pages">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Profile photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in places">
+                                <td>{{ $index + 1 }}</td>
+                                <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
+                                <td>{{ x.name }}</td>
+                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td>{{ x.id }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Groups.html">
+            <div id="page-Groups" class="pages">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Profile photo</th>
+                                <th>Name</th>
+                                <th>Favorite</th>
+                                <th>Details</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in groups">
+                                <td>{{ $index + 1 }}</td>
+                                <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
+                                <td>{{ x.name }}</td>
+                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td>{{ x.id }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Favorites.html">
+            <div id="page-Favorites" class="pages">
+                <h1>Page 2</h1>
+                <p>Use the method from any page in an ng-click or other event handler.</p>
+                <p><a ng-click="go('/page3', 'slideUp')">Slide up Page 3</a></p>
+                <code>&lt;a ng-click="go('/page3', 'slideUp')"&gt;Slide up Page 3&lt;/a&gt;</code>
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Detail.html">
+            <div id="page-Favorites" class="pages">
+
+                
+                <div class="panel-group" id="accordion1">
+                  <ul ng-repeat="x in detail.albums.data">
+                    <li>
+                      {{$index}},,,,,{{ x.name }}
+                      <ul>
+                        <li ng-repeat="y in x.photos.data">{{$index}},,,,,,{{ y.id }}</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+               
+                
+                <div class="col-md-4 column">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
+                        </h4>
+                      </div>
+                      <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
+                        </h4>
+                      </div>
+                      <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
+                        </h4>
+                      </div>
+                      <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                      </div>
+                    </div>
+                  </div> 
+            </div>
+
+                {{detail}}
+                
+                
+                
+                
+            </div>
+        </script>                
+        
+                
+                
+
+        </div>
+        </div>
+        <h1>{{ keyword }}</h1>
+        
+        <script src="FBSearch.js"></script>
+    </div><!--<div class="container">-->
+    
+    
+    
+    
+
+    
+    
+</body>
+
+</html>
