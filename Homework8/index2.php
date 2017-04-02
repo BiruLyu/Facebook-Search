@@ -24,50 +24,72 @@
     
     if(!empty($_GET['keyword'])){
         $keyword = $_GET['keyword'];
+        $result = new stdClass();
+        $result->users= new stdClass();
+        $result->pages= new stdClass();
+        $result->events= new stdClass();
+        $result->places= new stdClass();
+        $result->groups= new stdClass();
+        $result->favorites= new stdClass();
+
+        //var_dump($result);
+        $query = "/search?q=".$keyword."&type=user&fields=id,name,picture.width(700).height(700)";
+
+        $request = $fb->request('GET',$query);
+        $response = $fb->getClient()->sendRequest($request);
+        $obj = $response->getDecodedBody();
+        $result->users=$obj;
+
+        $query = "/search?q=".$keyword."&type=page&fields=id,name,picture.width(700).height(700)";
+        $request = $fb->request('GET',$query);
+        $response = $fb->getClient()->sendRequest($request);
+        $obj = $response->getDecodedBody();
+        $result->pages=$obj;
+
+        $query = "/search?q=".$keyword."&type=event&fields=id,name,picture.width(700).height(700)";
+        $request = $fb->request('GET',$query);
+        $response = $fb->getClient()->sendRequest($request);
+        $obj = $response->getDecodedBody();
+        $result->events=$obj;
+
+        $query = "/search?q=".$keyword."&type=place&fields=id,name,picture.width(700).height(700)";
+        $request = $fb->request('GET',$query);
+        $response = $fb->getClient()->sendRequest($request);
+        $obj = $response->getDecodedBody();
+        $result->places=$obj;
+
+        $query = "/search?q=".$keyword."&type=group&fields=id,name,picture.width(700).height(700)";    
+        $request = $fb->request('GET',$query);
+        $response = $fb->getClient()->sendRequest($request);
+        $obj = $response->getDecodedBody();
+        $result->groups=$obj;
+
+        //var_dump($obj);
+        echo json_encode($result);
     }
 
-    $result = new stdClass();
-    $result->users= new stdClass();
-    $result->pages= new stdClass();
-    $result->events= new stdClass();
-    $result->places= new stdClass();
-    $result->groups= new stdClass();
-    $result->favorites= new stdClass();
+    if(!empty($_GET['id'])){
+        $id = $_GET['id'];
+        $result = new stdClass();
+        
+
+        //var_dump($result);
+        
+        $query = "/".$id."?fields=id,name,picture.width(700).height(700),albums.limit(5){name,photos.limit(2){name, picture}},posts.limit(5)";
+
+        $request = $fb->request('GET',$query);
+        $response = $fb->getClient()->sendRequest($request);
+        $obj = $response->getDecodedBody();
+        $result = $obj;
+
+        //var_dump($obj);
+        echo json_encode($result);
+    }
+
     
-    //var_dump($result);
-    $query = "/search?q=".$keyword."&type=user&fields=id,name,picture.width(700).height(700)";
-    
-    $request = $fb->request('GET',$query);
-    $response = $fb->getClient()->sendRequest($request);
-    $obj = $response->getDecodedBody();
-    $result->users=$obj;
 
-    $query = "/search?q=".$keyword."&type=page&fields=id,name,picture.width(700).height(700)";
-    $request = $fb->request('GET',$query);
-    $response = $fb->getClient()->sendRequest($request);
-    $obj = $response->getDecodedBody();
-    $result->pages=$obj;
 
-    $query = "/search?q=".$keyword."&type=event&fields=id,name,picture.width(700).height(700)";
-    $request = $fb->request('GET',$query);
-    $response = $fb->getClient()->sendRequest($request);
-    $obj = $response->getDecodedBody();
-    $result->events=$obj;
 
-    $query = "/search?q=".$keyword."&type=place&fields=id,name,picture.width(700).height(700)";
-    $request = $fb->request('GET',$query);
-    $response = $fb->getClient()->sendRequest($request);
-    $obj = $response->getDecodedBody();
-    $result->places=$obj;
-
-    $query = "/search?q=".$keyword."&type=group&fields=id,name,picture.width(700).height(700)";    
-    $request = $fb->request('GET',$query);
-    $response = $fb->getClient()->sendRequest($request);
-    $obj = $response->getDecodedBody();
-    $result->groups=$obj;
-    
-    //var_dump($obj);
-    echo json_encode($result);
 
 
     ?>

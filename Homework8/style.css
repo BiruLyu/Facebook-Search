@@ -107,10 +107,10 @@ nav a
          -o-transition-timing-function: ease;
             transition-timing-function: ease;
     /*transition-duration*/
-    -webkit-transition-duration: 250ms;
-       -moz-transition-duration: 250ms;
-         -o-transition-duration: 250ms;
-            transition-duration: 250ms;
+    -webkit-transition-duration: 2.5s;
+       -moz-transition-duration: 2.5s;
+         -o-transition-duration: 2.5s;
+            transition-duration: 2.5s;
     /*transition-property*/
     -webkit-transition-property: opacity;
        -moz-transition-property: opacity;
