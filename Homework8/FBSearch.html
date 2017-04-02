@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp" ng-controller="namesCtrl">
 
 <head>
     <title>Bootstrap Example</title>
@@ -7,22 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="FBSearch.css" type="text/css" />
-    <script type="text/javascript" src="FBSearch.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/additional-methods.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.light.js"></script>
+     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 
 <body>
-    <div class="container" ng-app="myApp" ng-controller="namesCtrl">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <div class="navbar-header"> <a class="navbar-brand" href="#">FB Search</a> </div>
                         <form class="navbar-form navbar-left">
@@ -37,46 +38,59 @@
                         
                     </div>
                 </nav>
-            
-                
-                <div class="tabbable"> <!-- Only required for left/right tabs -->
+        
+    
+            <div class="tabbable"> <!-- Only required for left/right tabs -->
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab1" data-toggle="tab">Users</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Pages</a></li>
-                        <li><a href="#tab3" data-toggle="tab">Events</a></li>
-                        <li><a href="#tab4" data-toggle="tab">Places</a></li>
-                        <li><a href="#tab5" data-toggle="tab">Groups</a></li>
-                        <li><a href="#tab6" data-toggle="tab">Favorites</a></li>
+                        <li class="active"><a data-toggle="tab" ng-click="go('/page-Users')">Users</a></li>
+                        <li><a data-toggle="tab" ng-click="go('/page-Pages')">Pages</a></li>
+                        <li><a data-toggle="tab" ng-click="go('/page-Events')">Events</a></li>
+                        <li><a data-toggle="tab" ng-click="go('/page-Places')">Places</a></li>
+                        <li><a data-toggle="tab" ng-click="go('/page-Groups')">Groups</a></li>
+                        <li><a data-toggle="tab" ng-click="go('/page-Favorites')">Favorites</a></li>
                     </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane" id="tab1" class="active">
-                        <p>{{ names }}</p>
-                        <table class="table table-hover">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Profile photo</th>
-                                <th>Name</th>
-                                <th>Favorite</th>
-                                <th>Details</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="x in users">
-                                <td>{{ $index + 1 }}</td>
-                                <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
-                                <td>{{ x.name }}</td>
-                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
-                                <td>{{ detail }}</td>
-                                <td>{{ x.id }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        
-                    </div>
-                    <div class="tab-pane" id="tab2" >
-                        <p>Howdy, I'm in Section 2.</p>
+                    
+            </div>
+    
+        
+    
+        <!-- App Content Container -->
+        <div class="page-container">
+            <div ng-view="" class="page-view" ng-class="pageAnimationClass"></div>
+        </div>
+    
+        <div class="container" >
+        
+  
+            
+        <!-- Example page partials -->
+        <script type="text/ng-template" id="page-Users.html">
+            <div id="page-Users" class="pages">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Profile photo</th>
+                        <th>Name</th>
+                        <th>Favorite</th>
+                        <th>Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in users">
+                        <td>{{ $index + 1 }}</td>
+                        <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
+                        <td>{{ x.name }}</td>
+                        <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
+                        <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                        <td>{{ x.id }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </script>        
+        <script type="text/ng-template" id="page-Pages.html">
+            <div id="page-Pages" class="pages">
                         <table class="table table-hover">
                             <thead>
                               <tr>
@@ -93,15 +107,16 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="tab-pane" id="tab3">
-                        <p>Howdy, I'm in Section 3333333333333333.</p>
-                            <table class="table table-hover">
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Events.html">
+            <div id="page-Events" class="pages">
+                        <table class="table table-hover">
                             <thead>
                               <tr>
                                 <th>#</th>
@@ -117,14 +132,15 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="tab-pane" id="tab4">
-                        <p>Howdy, I'm in Section 4.</p>
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Places.html">
+            <div id="page-Places" class="pages">
                         <table class="table table-hover">
                             <thead>
                               <tr>
@@ -141,14 +157,15 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="tab-pane" id="tab5">
-                        <p>Howdy, I'm in Section 5.</p>
+            </div>
+        </script>
+        <script type="text/ng-template" id="page-Groups.html">
+            <div id="page-Groups" class="pages">
                         <table class="table table-hover">
                             <thead>
                               <tr>
@@ -165,23 +182,141 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="tab-pane" id="tab6">
-                        <p>Howdy, I'm in Section 6.</p>
-                        <table class="table table-hover"></table>
-                    </div>
-                    </div>
-               </div>
-
             </div>
-        </div>
-        <h1>{{ keyword }}</h1>
-        <script src="FBSearch.js"></script>
+        </script>
+        <script type="text/ng-template" id="page-Favorites.html">
+            <div id="page-Favorites" class="pages">
+                <h1>Page 2</h1>
+                <p>Use the method from any page in an ng-click or other event handler.</p>
+                <p><a ng-click="go('/page3', 'slideUp')">Slide up Page 3</a></p>
+                <code>&lt;a ng-click="go('/page3', 'slideUp')"&gt;Slide up Page 3&lt;/a&gt;</code>
+            </div>
+        </script>
+ 
+         <script type="text/ng-template" id="page-Detail.html">
+            <div id="page-Detail" class="pages">
+                <p>{{ detail }}</p>
+
+                
+
+                
+ <div id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="card">
+    <div class="card-header" role="tab" id="headingOne">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+      <div class="card-block">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="card-block">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingThree">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="card-block">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+                
+                
+                <div class="panel-group" role="tablist" aria-multiselectable="true" bs-collapse>
+                  <div class="panel panel-default" ng-repeat="x in detail.albums.data">
+                    <div class="panel-heading" role="tab">
+                      <h4 class="panel-title">
+                        <a bs-collapse-toggle>
+                          {{ x.name }}
+                        </a>
+                      </h4>
+                    </div>
+                    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+                      <div class="panel-body">
+                        {{ x.photos.data }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+            </div>
+        </script>
+        
+            
+        <script type="text/ng-template" id="page1.html">
+            <div id="page1" class="pages">
+                <h1>Page 1</h1>
+                <p>Here's a simple, scalable approach for page transitions in a single page app using the new(ish) class-based animation support for ng-view: a rootScope 'go' method.</p>
+                <p>We add the 'pageAnimationClass' class to the view container with ng-class and set up any number of arbitrary page transitions in our css file.</p>
+                
+            </div>
+        </script>
+            
+
+        <script type="text/ng-template" id="page2.html">
+            <div id="page2" class="pages">
+                <h1>Page 2</h1>
+                
+                <p>Use the method from any page in an ng-click or other event handler.</p>
+                <p><a ng-click="go('/page3', 'slideUp')">Slide up Page 3</a></p>
+                <code>&lt;a ng-click="go('/page3', 'slideUp')"&gt;Slide up Page 3&lt;/a&gt;</code>
+            </div>
+        </script>
+    
+        <script type="text/ng-template" id="page3.html">
+            <div id="page3" class="pages">
+                <h1>Page 3</h1>
+                <p>We can also include a 'back' keyword for convenience</p>
+                <p><a ng-click="go('back', 'slideLeft')">Slide left back to the previous page</a></p>
+                <code>&lt;a ng-click="go('back', 'slideLeft')"&gt;Slide left...&lt;/a&gt;</code>
+            </div>
+        </script>
+        
+        <script type="text/ng-template" id="page4.html">
+            <div id="page4" class="pages">
+                <h1>Page 4</h1>
+                <p>The transition class is optional since we set a default in our go method.</p>
+                <p><a ng-click="go('/page1')">Use the default transition (crossFade) to go to page 1</a></p>
+                <code>&lt;a ng-click="go('/page1')"&gt;Use the default...&lt;/a&gt;</code>
+            </div>
+        </script>
+        
+        
+        <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="https://code.angularjs.org/1.2.0/angular.js"></script>
+        <script src="https://code.angularjs.org/1.2.0/angular-route.js"></script>
+        <script src="https://code.angularjs.org/1.2.0/angular-animate.js"></script>
+        <script src="script.js"></script>
     </div><!--<div class="container">-->
     
     
