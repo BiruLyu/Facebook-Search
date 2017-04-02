@@ -6,22 +6,42 @@ var myApp = angular.module('myApp', []);
 myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
      "use strict";
     
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position){
+            
+            $scope.latitude = position.coords.latitude;
+            $scope.longitude = position.coords.longitude;
+            //alert($scope.latitude);
+            //alert($scope.longitude);
+                  
+        });
+    }
+    
+    
+    
+    
     $scope.Search = function() {
+        $('#loadingmessage').show();
         var data = {
             params: {
-                keyword: $scope.keyword
+                keyword : $scope.keyword,
+                latitude : $scope.latitude,
+                longitude : $scope.longitude
             }
         };
         $http.get("index2.php",data).then(function(response){
+        //alert(response.data);
         $scope.users = response.data.users.data;
         $scope.pages = response.data.pages.data;
         $scope.events = response.data.events.data;
         $scope.places = response.data.places.data;
         $scope.groups = response.data.groups.data;
+        $('#loadingmessage').hide();
         
     }
     );
     };
+    
     
     $scope.tabs = [
         {title: 'Users',url: 'page-Users.html'}, 
@@ -42,8 +62,8 @@ myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
         return tabUrl === $scope.currentTab;
     };
     
-    $scope.Details = function(itemId) {
-        $scope.detail = itemId;
+    $scope.Details = function(itemId, portrait) {
+        $scope.portrait = portrait;
         var config = {
             params: {
                 id: itemId
@@ -53,6 +73,7 @@ myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
                 $scope.detail = response.data;
             }
         );
+        
         $scope.currentTab = 'page-Detail.html';
        
     
@@ -62,29 +83,5 @@ myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
 });
 
 
-myApp.directive('dExpandCollapse', function() {
-    "use strict";
-  return {
-          restrict: 'EA',
-          link: function(scope, element, attrs){
-            
-            $(element).click( function() {
-                //var show = "false";
-                $(element).find(".answer").slideToggle('200',function() {            
-                    // You may toggle + - icon     
-                    $(element).find("span").toggleClass('faqPlus faqMinus');
-                });
-                if($("div.answer:visible").length>1) {
-                // You may toggle + - icon
-                //$(this).parent().find("span.faqMinus").removeClass('faqMinus').addClass('faqPlus');
-                    $(this).siblings().find(".answer").slideUp('slow');
-                }
-            });
 
-          }
-        };
-
-
-
-});
 //myApp.factory('myService', function() {});

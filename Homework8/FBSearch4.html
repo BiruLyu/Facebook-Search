@@ -47,7 +47,12 @@
                 </div>
                 
                 <div id="mainView">
-                    <div ng-include="currentTab">ppppp </div>
+                    
+                    <div class="progress" id="loadingmessage" style="display:none;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated"   role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+                    </div>
+                    
+                    <div ng-include="currentTab"></div>
                 </div>
                 
                 
@@ -72,7 +77,7 @@
                         <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                         <td>{{ x.name }}</td>
                         <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                        <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                        <td><button ng-click="Details( x.id, x.picture.data.url)" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                         <td>{{ x.id }}</td>
                     </tr>
                     </tbody>
@@ -97,7 +102,7 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id,x.picture.data.url )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
@@ -122,7 +127,7 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id,x.picture.data.url )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
@@ -147,7 +152,7 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id,x.picture.data.url )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
@@ -172,7 +177,7 @@
                                 <td><img src={{x.picture.data.url}} class="img-circle" width="40" height="40"/></td>
                                 <td>{{ x.name }}</td>
                                 <td><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button></td>
-                                <td><button ng-click="Details( x.id )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
+                                <td><button ng-click="Details( x.id,x.picture.data.url )" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button></td>
                                 <td>{{ x.id }}</td>
                             </tr>
                             </tbody>
@@ -190,65 +195,81 @@
         <script type="text/ng-template" id="page-Detail.html">
             <div id="page-Favorites" class="pages">
 
-                
-                <div class="panel-group" id="accordion1">
-                  <ul ng-repeat="x in detail.albums.data">
-                    <li>
-                      {{$index}},,,,,{{ x.name }}
-                      <ul>
-                        <li ng-repeat="y in x.photos.data">{{$index}},,,,,,{{ y.id }}</li>
-                      </ul>
-                    </li>
-                  </ul>
+<div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-6"><button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-left"></i>Back</button></div>
+    <div class="col-md-2  col-md-offset-8   col-xs-6 col-sm-4 col-sm-offset-4">
+<!--        <a href="#"><img src="https://www.sentinelsystems.ca/uploads/images/Buttons/FB_button.png" style="width: 30px ;height:30px" id="fbData"></a>-->
+        <button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-star-empty"></i></button>
+        <button class="btn btn-default" type="submit"> <img src="https://www.sentinelsystems.ca/uploads/images/Buttons/FB_button.png" style="width: 20px ;height:20px" id="fbData"></button>
+<!--        <button style="height: 30px" id="starBat"><i class="icon-star-empty icon-large icon-a " id="starElement"></i></button>-->
+    </div>
+</div>
+<div class="col-md-6 column">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Albums</h3></div>
+        <div class="panel-body">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" ng-repeat="x in detail.albums.data">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1{{$index}}">{{ x.name }}</a>
+                             </h4> </div>
+                    <div id="collapse1{{$index}}" class="panel-collapse collapse" ng-class="{in:$first}">
+                        <div class="panel-body">
+                            <div ng-repeat="y in x.photos.data">
+                                
+                                <img src="https://graph.facebook.com/v2.8/{{ y.id }}/picture?access_token=EAALF3VR0KV8BAJxZA0VAaZAe8SiNlqaWnZCs5RNfq6AcB9Tm3lVcI3dcZCMC4sCqVioaPzUbp6o9hSH1dizldHgwseo3UKI9WjFPlqEixJ3ZCo6YWkMfiDY6zR5cC7CvXtgXAjohkFY0nzLdMxKId29ulOKZBGFkkZD" class="img-rounded" width="100%" height="300">
+                                <hr>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
-               
-                
-                <div class="col-md-4 column">
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
-                        </h4>
-                      </div>
-                      <div id="collapse1" class="panel-collapse collapse in">
-                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
-                        </h4>
-                      </div>
-                      <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
-                        </h4>
-                      </div>
-                      <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                      </div>
-                    </div>
-                  </div> 
             </div>
-
-                {{detail}}
+        </div>
+    </div>
+</div>
                 
                 
+<div class="col-md-6 column">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Posts</h3></div>
+        <div class="panel-body">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" ng-repeat="x in detail.posts.data">
+                    
+                    
+                        <div class="panel-body">
+                            <div class="media">
+                              <div class="media-left">
+                                <img src="{{portrait}}" class="media-object" style="width:50px">
+                              </div>
+                              <div class="media-body">
+                                <h5 class="media-heading">{{detail.name}}</h5>
+                                <h5><small>{{x.created_time}}</small></h5>
+                                
+                              </div>
+                                <div class="media">
+                                <p class="mb-0">{{ x.message }}</p>
+                                </div>
+                            </div>
+                        
+                        </div>
+                   
+                    
+                </div>
+            </div>
+            
+           
+        </div>
+    </div>
+</div>
+          
                 
                 
+               
             </div>
         </script>                
         

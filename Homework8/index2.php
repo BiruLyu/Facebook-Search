@@ -21,9 +21,15 @@
 //    }
     
 
-    
+
+
     if(!empty($_GET['keyword'])){
         $keyword = $_GET['keyword'];
+        $latitude = $_GET['latitude'];
+        $longitude = $_GET['longitude'];
+        
+        //echo $keyword;
+        
         $result = new stdClass();
         $result->users= new stdClass();
         $result->pages= new stdClass();
@@ -39,25 +45,30 @@
         $response = $fb->getClient()->sendRequest($request);
         $obj = $response->getDecodedBody();
         $result->users=$obj;
-
+        //var_dump($result->users);
+        
         $query = "/search?q=".$keyword."&type=page&fields=id,name,picture.width(700).height(700)";
         $request = $fb->request('GET',$query);
         $response = $fb->getClient()->sendRequest($request);
         $obj = $response->getDecodedBody();
         $result->pages=$obj;
-
+        //var_dump($result->pages);
+        
         $query = "/search?q=".$keyword."&type=event&fields=id,name,picture.width(700).height(700)";
         $request = $fb->request('GET',$query);
         $response = $fb->getClient()->sendRequest($request);
         $obj = $response->getDecodedBody();
         $result->events=$obj;
+        //var_dump($result->events);
 
-        $query = "/search?q=".$keyword."&type=place&fields=id,name,picture.width(700).height(700)";
+        $query = "/search?q=".$keyword."&type=place&center=".$latitude.",".$longitude."&fields=id,name,picture.width(700).height(700)";
         $request = $fb->request('GET',$query);
         $response = $fb->getClient()->sendRequest($request);
         $obj = $response->getDecodedBody();
         $result->places=$obj;
-
+        //var_dump($result->places);
+        
+        
         $query = "/search?q=".$keyword."&type=group&fields=id,name,picture.width(700).height(700)";    
         $request = $fb->request('GET',$query);
         $response = $fb->getClient()->sendRequest($request);
@@ -66,6 +77,7 @@
 
         //var_dump($obj);
         echo json_encode($result);
+        //echo $keyword;
     }
 
     if(!empty($_GET['id'])){
