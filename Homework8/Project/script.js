@@ -86,7 +86,8 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
     };
     
     
-    $scope.Details = function(itemId, portrait) {
+    ///////////////////Details////////////////////////
+        $scope.Details = function(itemId, portrait) {
         //$scope.currentTab = 'page-Detail.html';
         $('#loadingAlbum').show();
         $('#loadingPosts').show();
@@ -111,8 +112,48 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
     
     };
     
-    ////////////
     
+    ///////////////////PageChanging/////////////////////
+    
+        $scope.PageChanging = function(Flag,Url){
+        
+
+        var config= {params: {url: Url}};  
+            
+        
+        
+        $http.get(Url).then(function(response){
+
+                $scope.myTable = response.data;
+            
+                if(Flag === 'Users') {$scope.users = $scope.myTable;}
+                else if(Flag === 'Pages') {$scope.pages = $scope.myTable;}
+                else if(Flag === 'Events') {$scope.events = $scope.myTable;}
+                else if(Flag === 'Places') {$scope.places = $scope.myTable;}
+                else if(Flag === 'Groups') {$scope.groups = $scope.myTable;}
+                else if(Flag === 'Favorites') {$scope.favorites = $scope.myTable;}
+            
+                if($scope.myTable.paging.previous === undefined){
+                    //alert(1);
+                    $('#goNext').show();
+                    $('#goPrevious').hide();
+                } else if ( $scope.myTable.paging.next === undefined || $scope.myTable.data.length < 25) {
+                    //alert(2);
+                    $('#goNext').hide();
+                    $('#goPrevious').show();
+                } else {
+                    //alert(3);
+                    $('#goNext').show();
+                    $('#goPrevious').show();
+                }
+                
+            }
+        );
+        
+        
+
+         
+    };
     
     
 });
