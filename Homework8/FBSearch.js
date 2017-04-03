@@ -6,6 +6,7 @@ var myApp = angular.module('myApp', []);
 myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
      "use strict";
     
+
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position){
             
@@ -17,6 +18,7 @@ myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
         });
     }
     
+
     
     
     
@@ -31,12 +33,27 @@ myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
         };
         $http.get("index2.php",data).then(function(response){
         //alert(response.data);
-        $scope.users = response.data.users.data;
+        
+        $scope.users = response.data.users;
         $scope.pages = response.data.pages.data;
         $scope.events = response.data.events.data;
         $scope.places = response.data.places.data;
         $scope.groups = response.data.groups.data;
         $('#loadingmessage').hide();
+        
+        if($scope.users.paging.previous === undefined){
+            alert(1);
+            $('#goNext').show();
+            $('#goPrevious').hide();
+        } else if ( $scope.users.paging.next === undefined) {
+            alert(2);
+            $('#goNext').hide();
+            $('#goPrevious').show();
+        } else {
+            alert(3);
+            $('#goNext').show();
+            $('#goPrevious').show();
+        }
         
     }
     );
@@ -56,6 +73,22 @@ myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
 
     $scope.onClickTab = function (tab) {
         $scope.currentTab = tab.url;
+ 
+        
+        if($scope.users.paging.previous === undefined){
+            alert(1);
+            $('#goNext').show();
+            $('#goPrevious').hide();
+        } else if ( $scope.users.paging.next === undefined) {
+            alert(2);
+            $('#goNext').hide();
+            $('#goPrevious').show();
+        } else {
+            alert(3);
+            $('#goNext').show();
+            $('#goPrevious').show();
+        }
+        
     };
     
     $scope.isActiveTab = function(tabUrl) {
@@ -79,6 +112,44 @@ myApp.controller('namesCtrl', function($scope, $rootScope, $http, $log) {
     
         //$rootScope.$emit("CallParentMethod", {path:'/page4',pageAnimationClass:'slideLeft'});
     
+    };
+    
+   
+    
+    $scope.PageChanging = function(tab,previousUrl, nextUrl){
+        
+
+        
+        var config;
+        if(tab === 'Previous'){
+            config = {params: {url: previousUrl}};           
+            
+        } else {
+            config = {params: {url: nextUrl}};
+              
+        }
+        
+        $http.get("index2.php",config).then(function(response){
+
+                $scope.users = response.data;
+                if($scope.users.paging.previous === undefined){
+                    alert(1);
+                    $('#goNext').show();
+                    $('#goPrevious').hide();
+                } else if ( $scope.users.paging.next === undefined || $scope.users.data.length < 25) {
+                    alert(2);
+                    $('#goNext').hide();
+                    $('#goPrevious').show();
+                } else {
+                    alert(3);
+                    $('#goNext').show();
+                    $('#goPrevious').show();
+                }
+                
+            
+            }
+        );
+         
     };
 });
 

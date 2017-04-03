@@ -21,12 +21,22 @@
 //    }
     
 
+//    $_GET['url'] = 'https://graph.facebook.com/v2.8/search?fields=id,name,picture.width%28700%29.height%28700%29&type=user&q=usc&access_token=EAALF3VR0KV8BAJxZA0VAaZAe8SiNlqaWnZCs5RNfq6AcB9Tm3lVcI3dcZCMC4sCqVioaPzUbp6o9hSH1dizldHgwseo3UKI9WjFPlqEixJ3ZCo6YWkMfiDY6zR5cC7CvXtgXAjohkFY0nzLdMxKId29ulOKZBGFkkZD&limit=25&offset=25&__after_id=enc_AdCdUbK4GxNay9Bth35CrmaW1M246St2uCy9BEcJrcxmKsg1UnXGKGBwTyZCZBvDCphjyg5bJ1y01sBmfN0LZAcJclC';
 
+    if(!empty($_GET['url'])){
+        $query = $_GET['url'];
+        
+        //$result = new stdClass();
+        $jsonFile = file_get_contents($query);
+        //$doc = json_decode($jsonFile);
+        //$result = $doc;
+        //echo json_encode($result);
+        echo $jsonFile;
+    }
 
     if(!empty($_GET['keyword'])){
         $keyword = $_GET['keyword'];
-        $latitude = $_GET['latitude'];
-        $longitude = $_GET['longitude'];
+    
         
         //echo $keyword;
         
@@ -60,8 +70,14 @@
         $obj = $response->getDecodedBody();
         $result->events=$obj;
         //var_dump($result->events);
-
-        $query = "/search?q=".$keyword."&type=place&center=".$latitude.",".$longitude."&fields=id,name,picture.width(700).height(700)";
+        
+        if(empty($_GET['latitude']) || empty($_GET['longitude']))
+        {
+            $query = "/search?q=".$keyword."&type=place&fields=id,name,picture.width(700).height(700)";
+        } else {
+            $query = "/search?q=".$keyword."&type=place&center=".$_GET['latitude'].",".$_GET['longitude']."&fields=id,name,picture.width(700).height(700)";
+        }
+        
         $request = $fb->request('GET',$query);
         $response = $fb->getClient()->sendRequest($request);
         $obj = $response->getDecodedBody();
