@@ -1,3 +1,17 @@
+.full-width-tabs > ul.nav.nav-tabs {
+    display: table;
+    width: 100%;
+    #table-layout: fixed;
+}
+.full-width-tabs > ul.nav.nav-tabs > li {
+    float: none;
+    display: table-cell;
+}
+.full-width-tabs > ul.nav.nav-tabs > li > a {
+    text-align: center;
+}
+
+
 /* ngSwitch animation */
 .switchItemRelative {
     position: relative;
