@@ -1,6 +1,9 @@
 /*jslint white:true */
 /*global angular */
-/*global $, jQuery, alert*/
+/*global $, jQuery, alert, FB*/
+
+
+
 var app = angular.module('myApp', ['ngAnimate']);
 app.controller('animationsCtrl', function ($scope, $http, $log) {
     "use strict";
@@ -43,11 +46,32 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
     $scope.currentTab = 'one.tpl.html';
     $scope.myTable = $scope.users;
     $scope.flag = 'users';
-    
-    ////////////////////Click Tab ////////////////////////////
+    //////////////////////Click Tab ////////////////////////////
     $scope.onClickTab = function (tab) {
-        $scope.ngSwitchSelected = 'item1';
         // $scope.currentTab = tab.url;
+        
+        if ($scope.myTable.paging.previous === undefined) {
+            //alert(1);
+            $('#goNext').show();
+            $('#goPrevious').hide();
+        }
+        else if ($scope.myTable.paging.next === undefined) {
+            //alert(2);
+            $('#goNext').hide();
+            $('#goPrevious').show();
+        }
+        else {
+            //alert(3);
+            $('#goNext').show();
+            $('#goPrevious').show();
+        }
+        if ($scope.isDetail) {
+            $scope.ngSwitchSelected = 'item1';
+            $scope.isDetail = false;
+        }
+        
+        
+        
         if (tab.title === 'Users') {
             //$('.type').hide();
             $scope.activeFavorite = false;
@@ -81,11 +105,11 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         else if (tab.title === 'Favorites') {
             //$('.type').show();
             $scope.activeFavorite = true;
-            var favorList = [],temp = [], tempPair={};
+            var favorList = []
+                , temp = []
+                , tempPair = {};
             $scope.favorites = [];
-            $.each(localStorage, function(key, value){
-                
-                
+            $.each(localStorage, function (key, value) {
                 temp = JSON.parse(value);
                 //alert(temp[0]);
                 $scope.favorites.push(temp);
@@ -94,37 +118,14 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
                 //var temp2 = JSON.parse(localStorage.getItem(id));
                 //alert(temp[0]);
                 //alert(tempPair.picture);
-              // key magic
-              // value magic
-
+                // key magic
+                // value magic
             });
-            
-            
             //$scope.myTable = $scope.favorites;
-            
             $scope.flag = 'favorites';
-            
-            
         }
-        if ($scope.myTable.paging.previous === undefined) {
-            //alert(1);
-            $('#goNext').show();
-            $('#goPrevious').hide();
-        }
-        else if ($scope.myTable.paging.next === undefined) {
-            //alert(2);
-            
-            $('#goNext').hide();
-            $('#goPrevious').show();
-        }
-        else {
-            //alert(3);
-            $('#goNext').show();
-            $('#goPrevious').show();
-        }
+
     };
-    
-    
     ///////////////////Search////////////////////////
     $scope.Search = function () {
         $('#initialPage').show();
@@ -144,14 +145,32 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
             $scope.places = response.data.places;
             $scope.groups = response.data.groups;
             $('#loadingmessage').hide();
-            $scope.myTable = $scope.users;
+            
+            if ($scope.flag === 'users') {
+                $scope.myTable = $scope.users;
+            }
+            else if ($scope.flag === 'pages') {
+                $scope.myTable = $scope.pages;
+            }
+            else if ($scope.flag === 'events') {
+                $scope.myTable = $scope.events;
+            }
+            else if ($scope.flag === 'places') {
+                $scope.myTable = $scope.places;
+            }
+            else if ($scope.flag === 'groups') {
+                $scope.myTable = $scope.groups;
+            }
+            
         }, function errorCallback(response) {
+            
             alert(response.data);
         });
     };
     ///////////////////Details////////////////////////
     $scope.Details = function (itemId, portrait) {
         //$scope.currentTab = 'page-Detail.html';
+        $scope.isDetail = true;
         $scope.ngSwitchSelected = 'item2';
         $('#loadingAlbum').show();
         $('#loadingPosts').show();
@@ -163,70 +182,96 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         };
         $http.get("index2.php", config).then(function (response) {
             $scope.detail = response.data;
+            $scope.test = $scope.detail;
+            //alert($scope.detail.albums.data.length);
+            if($scope.detail.albums !== undefined && $scope.detail.albums.data !== undefined && $scope.detail.albums.data.length > 0){
+                $scope.albumNums = true;
+            } else {
+                $scope.albumNums = false;
+            }
+            
+            if($scope.detail.posts !==undefined && $scope.detail.posts.data !== undefined && $scope.detail.posts.data.length > 0){
+                $scope.postsNums = true;
+            } else {
+                $scope.postsNums = false;
+            }
+            
+            $('#loadingAlbum').hide();
+            $('#loadingPosts').hide();
+            
+        }, function errorCallback(response) {
+            $scope.albumNums = false;
+            $scope.postsNums = false;
             $('#loadingAlbum').hide();
             $('#loadingPosts').hide();
         });
-       
         //$rootScope.$emit("CallParentMethod", {path:'/page4',pageAnimationClass:'slideLeft'});
+    };
+    
+    $scope.timeFormat = function(created_time){
+        return Date.parse(created_time);
+    };
+    
+    
+    $scope.postFB = function(portrait, name){
+        FB.ui({
+                  method: 'feed',
+                  picture: portrait,
+                  name: name,
+                  display: 'popup',
+                  caption: 'FB SEARCH FROM USC CSCI571'
+                }, function(response){}); 
     };
     ///////////////////Back/////////////////////
     $scope.Back = function () {
         $scope.ngSwitchSelected = 'item1';
-        
     };
     ///////////////////FavoriteStyle/////////////////
-    
-    
-    
-    $scope.activeStarStyle = function(id){
+    $scope.activeStarStyle = function (id) {
         var temp = {};
         if (localStorage.getItem(id) === null) {
-            temp = { "color" : 'black'};
-            
-        } else {
-            temp = {'color' : '#FED800'};
+            temp = {
+                "color": 'black'
+            };
+        }
+        else {
+            temp = {
+                'color': '#FED800'
+            };
         }
         return temp;
-    }; 
-    
-    $scope.activeStarClass = function(id){
+    };
+    $scope.activeStarClass = function (id) {
         var temp = [];
         if (localStorage.getItem(id) === null) {
-            
             temp.push('glyphicon');
             temp.push('glyphicon-star-empty');
-            
-        } else {
-            
+        }
+        else {
             temp.push('glyphicon');
             temp.push('glyphicon-star');
-            
         }
         return temp;
     };
-    
-
     ///////////////////Delete Favorite/////////////////
-    
-    $scope.DelFavorite = function(id){
+    $scope.DelFavorite = function (id) {
         localStorage.removeItem(id);
-        $scope.onClickTab({title:'Favorites'});
+        $scope.onClickTab({
+            title: 'Favorites'
+        });
     };
-    
     ///////////////////Favorite/////////////////
-    $scope.Favorite = function(id, url, name, flag){
-        
-        if(localStorage.getItem(id) === null){
+    $scope.Favorite = function (id, url, name, flag) {
+        if (localStorage.getItem(id) === null) {
             var a, temp = [];
             //a = '#'+id;
             //$(a).removeClass( "glyphicon-star-empty" ).addClass( "glyphicon-star" ).css('color', '#FED800');
-
             temp.push(url, name, flag, id);
-            localStorage.setItem(id,JSON.stringify(temp));
-        } else {
+            localStorage.setItem(id, JSON.stringify(temp));
+        }
+        else {
             localStorage.removeItem(id);
         }
-    
     };
     ///////////////////PageChanging/////////////////////
     $scope.PageChanging = function (Flag, Url) {
@@ -252,9 +297,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
             else if (Flag === 'groups') {
                 $scope.groups = $scope.myTable;
             }
-            else if (Flag === 'favorites') {
-                $scope.favorites = $scope.myTable;
-            }
+//            else if (Flag === 'favorites') {
+//                $scope.favorites = $scope.favorites;
+//            }
             if ($scope.myTable.paging.previous === undefined) {
                 //alert(1);
                 $('#goNext').show();
