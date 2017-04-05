@@ -1,13 +1,13 @@
 /*jslint white:true */
 /*global angular */
-/*global $, jQuery, alert, FB*/
+/*global console,$, jQuery, alert, FB*/
 
 
 
 var app = angular.module('myApp', ['ngAnimate']);
 app.controller('animationsCtrl', function ($scope, $http, $log) {
     "use strict";
-    //localStorage.clear();
+    localStorage.clear();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             $scope.latitude = position.coords.latitude;
@@ -44,89 +44,12 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         }
     ];
     $scope.currentTab = 'one.tpl.html';
+ 
     $scope.myTable = $scope.users;
     $scope.flag = 'users';
-    //////////////////////Click Tab ////////////////////////////
-    $scope.onClickTab = function (tab) {
-        // $scope.currentTab = tab.url;
-        
-        if ($scope.myTable.paging.previous === undefined) {
-            //alert(1);
-            $('#goNext').show();
-            $('#goPrevious').hide();
-        }
-        else if ($scope.myTable.paging.next === undefined) {
-            //alert(2);
-            $('#goNext').hide();
-            $('#goPrevious').show();
-        }
-        else {
-            //alert(3);
-            $('#goNext').show();
-            $('#goPrevious').show();
-        }
-        if ($scope.isDetail) {
-            $scope.ngSwitchSelected = 'item1';
-            $scope.isDetail = false;
-        }
-        
-        
-        
-        if (tab.title === 'Users') {
-            //$('.type').hide();
-            $scope.activeFavorite = false;
-            $scope.myTable = $scope.users;
-            $scope.flag = 'users';
-        }
-        else if (tab.title === 'Pages') {
-            //$('.type').hide();
-            $scope.activeFavorite = false;
-            $scope.myTable = $scope.pages;
-            $scope.flag = 'pages';
-        }
-        else if (tab.title === 'Events') {
-            //$('.type').hide();
-            $scope.activeFavorite = false;
-            $scope.myTable = $scope.events;
-            $scope.flag = 'events';
-        }
-        else if (tab.title === 'Places') {
-            //$('.type').hide();
-            $scope.activeFavorite = false;
-            $scope.myTable = $scope.places;
-            $scope.flag = 'places';
-        }
-        else if (tab.title === 'Groups') {
-            //$('.type').hide();
-            $scope.activeFavorite = false;
-            $scope.myTable = $scope.groups;
-            $scope.flag = 'groups';
-        }
-        else if (tab.title === 'Favorites') {
-            //$('.type').show();
-            $scope.activeFavorite = true;
-            var favorList = []
-                , temp = []
-                , tempPair = {};
-            $scope.favorites = [];
-            $.each(localStorage, function (key, value) {
-                temp = JSON.parse(value);
-                //alert(temp[0]);
-                $scope.favorites.push(temp);
-                //tempPair = { picture : temp[0],name:temp[1],type:temp[2]};
-                //favorList.push(tempPair);
-                //var temp2 = JSON.parse(localStorage.getItem(id));
-                //alert(temp[0]);
-                //alert(tempPair.picture);
-                // key magic
-                // value magic
-            });
-            //$scope.myTable = $scope.favorites;
-            $scope.flag = 'favorites';
-        }
-
-    };
-    ///////////////////Search////////////////////////
+    localStorage.setItem('favoriteIndex',JSON.stringify([]));
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////Search////////////////////////
     $scope.Search = function () {
         $('#initialPage').show();
         $('#loadingmessage').show();
@@ -167,7 +90,105 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
             alert(response.data);
         });
     };
-    ///////////////////Details////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////Click Tab ////////////////////////////
+    $scope.onClickTab = function (tab) {
+        // $scope.currentTab = tab.url;
+        
+        
+        if (tab.title === 'Users') {
+            //$('.type').hide();
+            $scope.activeFavorite = false;
+            $scope.myTable = $scope.users;
+            $scope.flag = 'users';
+        }
+        else if (tab.title === 'Pages') {
+            //$('.type').hide();
+            $scope.activeFavorite = false;
+            $scope.myTable = $scope.pages;
+            $scope.flag = 'pages';
+        }
+        else if (tab.title === 'Events') {
+            //$('.type').hide();
+            $scope.activeFavorite = false;
+            $scope.myTable = $scope.events;
+            $scope.flag = 'events';
+        }
+        else if (tab.title === 'Places') {
+            //$('.type').hide();
+            $scope.activeFavorite = false;
+            $scope.myTable = $scope.places;
+            $scope.flag = 'places';
+        }
+        else if (tab.title === 'Groups') {
+            //$('.type').hide();
+            $scope.activeFavorite = false;
+            $scope.myTable = $scope.groups;
+            $scope.flag = 'groups';
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////Favorite Page ////////////////////////////
+        else if (tab.title === 'Favorites') {
+            //$('.type').show();
+            $scope.activeFavorite = true;
+            var favorList = []
+                , temp = []
+                , tempPair = {}
+                ,favoriteIndex =[];
+            $scope.favorites = [];
+
+            //$.each(localStorage, function (key, value) {
+                //temp = JSON.parse(value);
+                //alert(key);
+                //alert(value);
+                //$scope.favorites.push(temp);
+                //tempPair = { picture : temp[0],name:temp[1],type:temp[2]};
+                //favorList.push(tempPair);
+                //var temp2 = JSON.parse(localStorage.getItem(id));
+                //alert(temp[0]);
+                //alert(tempPair.picture);
+                // key magic
+                // value magic
+            //});
+                favoriteIndex = JSON.parse(localStorage.getItem('favoriteIndex'));
+                console.log(favoriteIndex);
+                $.each(favoriteIndex, function (key,value) {
+                    console.log(key,value);
+                    temp = JSON.parse(localStorage.getItem(value));
+                    $scope.favorites.push(temp);
+                });
+//                favoriteIndex.forEach(function(key) {
+//                console.log(key);
+//                temp = JSON.parse(localStorage.getItem(key));
+//                $scope.favorites.push(temp);
+//                //console.log(element);
+//                
+//            });
+            //$scope.myTable = $scope.favorites;
+            $scope.flag = 'favorites';
+        }
+        
+        if ($scope.myTable.paging.previous === undefined) {
+            //alert(1);
+            $('#goNext').show();
+            $('#goPrevious').hide();
+        }
+        else if ($scope.myTable.paging.next === undefined) {
+            //alert(2);
+            $('#goNext').hide();
+            $('#goPrevious').show();
+        }
+        else {
+            //alert(3);
+            $('#goNext').show();
+            $('#goPrevious').show();
+        }
+        if ($scope.isDetail) {
+            $scope.ngSwitchSelected = 'item1';
+            $scope.isDetail = false;
+        }
+
+    };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Details////////////////////////
     $scope.Details = function (itemId, portrait) {
         //$scope.currentTab = 'page-Detail.html';
         $scope.isDetail = true;
@@ -222,11 +243,11 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
                   caption: 'FB SEARCH FROM USC CSCI571'
                 }, function(response){}); 
     };
-    ///////////////////Back/////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Back/////////////////////
     $scope.Back = function () {
         $scope.ngSwitchSelected = 'item1';
     };
-    ///////////////////FavoriteStyle/////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////FavoriteStyle/////////////////
     $scope.activeStarStyle = function (id) {
         var temp = {};
         if (localStorage.getItem(id) === null) {
@@ -253,27 +274,41 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         }
         return temp;
     };
-    ///////////////////Delete Favorite/////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Delete Favorite/////////////////
     $scope.DelFavorite = function (id) {
+        var favoriteIndex = JSON.parse(localStorage.getItem('favoriteIndex'));
+        favoriteIndex.splice(favoriteIndex.indexOf(id),1);
+        localStorage.setItem('favoriteIndex',JSON.stringify(favoriteIndex));
         localStorage.removeItem(id);
         $scope.onClickTab({
             title: 'Favorites'
         });
     };
-    ///////////////////Favorite/////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Favorite/////////////////
     $scope.Favorite = function (id, url, name, flag) {
+        var a, temp = [],favoriteIndex = [];
         if (localStorage.getItem(id) === null) {
-            var a, temp = [];
+            
+            favoriteIndex = JSON.parse(localStorage.getItem('favoriteIndex'));
+            console.log(favoriteIndex);
+            favoriteIndex.push(id);
+            localStorage.setItem('favoriteIndex',JSON.stringify(favoriteIndex));
             //a = '#'+id;
             //$(a).removeClass( "glyphicon-star-empty" ).addClass( "glyphicon-star" ).css('color', '#FED800');
             temp.push(url, name, flag, id);
             localStorage.setItem(id, JSON.stringify(temp));
         }
         else {
+            favoriteIndex = JSON.parse(localStorage.getItem('favoriteIndex'));
+            console.log(favoriteIndex);
+            favoriteIndex.splice(favoriteIndex.indexOf(id),1);
+            console.log(favoriteIndex);
+            localStorage.setItem('favoriteIndex',JSON.stringify(favoriteIndex));
             localStorage.removeItem(id);
+            
         }
     };
-    ///////////////////PageChanging/////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////PageChanging/////////////////////
     $scope.PageChanging = function (Flag, Url) {
         var config = {
             params: {
