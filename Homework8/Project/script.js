@@ -8,13 +8,14 @@ angular.element(document).ready(function () {
     $('#firstPage').hide();
     $('#albumsData').hide();
     $('#postsData').hide();
+    
 });
 var app = angular.module('myApp', ['ngAnimate']);
 app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     "use strict";
     //localStorage.clear();
     
-    
+    $scope.isReset = false;
     if(localStorage.getItem('favoriteIndex') === null){
         localStorage.setItem('favoriteIndex',JSON.stringify([]));
     }
@@ -62,6 +63,13 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     
     //////////////////////////////////////////////////////////////////////////////////////////////////Reset////////////////////////
     $scope.Reset = function(){
+        
+        $('[data-toggle="tooltip"]').tooltip('destroy');
+        if ($scope.isDetail) {
+            $scope.ngSwitchSelected = 'item1';
+            $scope.isDetail = false;
+        }
+        $scope.isReset = true;
         $scope.keyword = '';
         $scope.myTable = {};
         $scope.users = {};
@@ -73,7 +81,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         $('#firstPage').hide();
         $('#albumsData').hide();
         $('#postsData').hide();
-        
+
         //$window.location.reload();
     };
     //////////////////////////////////////////////////////////////////////////////////////////////////inputValid////////////////////////
@@ -87,14 +95,18 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             return false;
             
         } else {
-            $('[data-toggle="tooltip"]').tooltip('disable');
-            //$('[data-toggle="tooltip"]').tooltip('destroy');
+            //$('[data-toggle="tooltip"]').tooltip('disable');
+            $('[data-toggle="tooltip"]').tooltip('destroy');
             return true;
         }
     };
     //////////////////////////////////////////////////////////////////////////////////////////////////Search////////////////////////
     $scope.Search = function () {
+        $scope.isReset = false;
         console.log($scope.keyword.$valid);
+        
+        
+        
         $('#firstPage').hide();
         //$('#initialPage').show();
         $('#firstProgress').show();
@@ -137,6 +149,26 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             alert(response.data);
         });
     };
+    ////////////////////////////////////////////////////////////////////////////////////////////////////isInputNull//////////////////////////
+    $scope.isInputNull = function (){
+        console.log('Now');
+        console.log($scope.flag);
+       
+        if($scope.flag === 'favorites'){
+            console.log('false');
+            return false;
+        } else {
+            console.log($scope.myTable);
+            console.log(Object.keys($scope.myTable).length);
+            if( $scope.myTable === undefined || Object.keys($scope.myTable).length === 0){
+                console.log('true');
+                return true;
+            } else {
+                console.log('false');
+                return false;
+            }
+        }
+    };
         ////////////////////////////////////////////////////////////////////////////////////////////////Click Tab ////////////////////////////
     $scope.isActiveTab = function(tab){
        // alert(tab.title);
@@ -145,18 +177,21 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         return tab.title.toLowerCase() === $scope.flag;
     };
     $scope.onClickTab = function (tab) {
+        $('[data-toggle="tooltip"]').tooltip('destroy');
+        $scope.isReset = false;
         // $scope.currentTab = tab.url;
         //var temp2222 = 'true';
         //console.log(tab.title === $scope.flag.toLowerCase());
-        if($scope.inputValid === false && tab.title !== 'Favorites'){
-            $('[data-toggle="tooltip"]').tooltip('enable');
-            $('[data-toggle="tooltip"]').tooltip("show");
-        } else {
-        if($scope.keyword === '' || $scope.keyword === undefined ){
-            $('#firstPage').hide();
-        } else {
-            $('#firstPage').show();
-        }
+        //if($scope.inputValid() === false && tab.title !== 'Favorites'){
+            //$('[data-toggle="tooltip"]').tooltip('enable');
+            //$('[data-toggle="tooltip"]').tooltip("show");
+           // $('#firstPage').hide();
+        //} else {
+//        if($scope.keyword === '' || $scope.keyword === undefined ){
+//            $('#firstPage').hide();
+//        } else {
+//            $('#firstPage').show();
+//        }
         if (tab.title === 'Users') {
             //$('.type').hide();
             $scope.activeFavorite = false;
@@ -231,7 +266,12 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#firstPage').show();
             
         }
-        
+        console.log('1111111');
+         console.log($scope.myTable);
+        if($scope.myTable===undefined && $scope.flag !== 'favorites'){
+            $('#firstPage').hide();
+        }
+        if($scope.myTable!==undefined && $scope.myTable.paging!==undefined){
         if ($scope.myTable.paging.previous === undefined) {
             //alert(1);
             $('#goNext').show();
@@ -247,11 +287,12 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#goNext').show();
             $('#goPrevious').show();
         }
+        }
         if ($scope.isDetail) {
             $scope.ngSwitchSelected = 'item1';
             $scope.isDetail = false;
         }
-        }
+        //}
 
     };
 
@@ -336,7 +377,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         
         
         $scope.ngSwitchSelected = 'item1';
-        $('#firstPage').show();
+        //$('#firstPage').show();
         console.log($('#firstPage'));
         
         $scope.onClickTab({

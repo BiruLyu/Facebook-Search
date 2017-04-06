@@ -47,7 +47,7 @@
 <!--                <div class="col-xs-12 col-md-10">-->
 <!--                    <div class="row">-->
 <!--                <form class="navbar-form navbar-left">-->
-                    <div class = "col-xs-8 col-md-5">
+                    <div class = "col-xs-9 col-md-5">
                     <div id="searchGroup" class="input-group">
                         
                         <input id="searchInput" type="text" ng-model="keyword" data-toggle="tooltip" data-placement="bottom" title="Please type a keyword" class="form-control" placeholder="type something..." name="keyword" required>
@@ -57,7 +57,7 @@
                         
                     </div>
                     </div>
-                    <div class="col-xs-4 col-md-4"><button id="clearButton" type="Reset" class="btn btn-default btn-primary" ng-click="Reset()">Clear</button></div>
+                    <div class="col-xs-3 col-md-4"><button id="clearButton" type="Reset" class="btn btn-default btn-primary" ng-click="Reset()">Clear</button></div>
                    
 <!--                </form>-->
                     
@@ -67,10 +67,12 @@
         </nav>
         <div class="tabbable" id="tabLine">
             <!-- Only required for left/right tabs -->
+             <div class="container-fluid">
             <div class="row">
             <ul class="nav nav-tabs">
                 <li ng-repeat="tab in tabs" class="col-md-2 col-xs-12 eachTab" ng-class="{tabActive:isActiveTab(tab)}" ng-click="onClickTab(tab)">{{tab.title}}</li>
             </ul>
+            </div>
             </div>
         </div>
         
@@ -91,7 +93,7 @@
                                 </div>
                             </div>
 <!--                            </div>-->
-                            <div id="firstPage" class="pages" >
+                            <div id="firstPage" class="pages" ng-show="!isInputNull() && !isReset">
                                 
                                 
                                 <div id="tableData">
@@ -227,9 +229,9 @@
                                                     <div class="panel-body">
                                                         <div class="media">
                                                             <div class="media-left"> <img src="{{portrait}}" class="media-object" style="width:50px"> </div>
-                                                            <div class="media-body">
+                                                            <div class="media-body postNameAndTime" >
                                                                 <h5 class="media-heading">{{detail.name}}</h5>
-                                                                <h4><small class="postsTime">{{timeFormat(x.created_time) | date:'yyyy-MM-dd HH:mm:ss'}}</small></h4> </div>
+                                                                <h4 class="postTime"><small class="postsTime">{{timeFormat(x.created_time) | date:'yyyy-MM-dd HH:mm:ss'}}</small></h4> </div>
                                                             <div class="media">
                                                                 <p class="mb-0">{{ x.message }}</p>
                                                             </div>

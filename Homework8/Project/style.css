@@ -57,7 +57,17 @@
 button:focus,i:focus{
     outline: none;
 }
-
+h4.postTime{
+    margin-top: -5px;
+}
+h5.media-heading.ng-binding{
+    margin-top: 6px;
+}
+/*
+.media-body.postNameAndTime{
+    padding-top: 5px;
+}
+*/
 #previous-and-next-button{
     text-align: center;
 }
@@ -69,6 +79,9 @@ button:focus,i:focus{
 }
 #goPrevious:hover,#goNext:hover {
     background: white;
+}
+#searchButton{
+    border-color: #3D5898;
 }
 #searchButton:focus{
     outline: none;
