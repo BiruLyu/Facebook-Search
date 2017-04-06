@@ -6,20 +6,14 @@
 angular.element(document).ready(function () {
     "use strict";
     $('#firstPage').hide();
-
+    $('#albumsData').hide();
+    $('#postsData').hide();
 });
 var app = angular.module('myApp', ['ngAnimate']);
 app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     "use strict";
     //localStorage.clear();
     
-    
-    var init = function () {
-    // do something
-        $('#firstPage').hide();
-    };
-
-    init();
     
     if(localStorage.getItem('favoriteIndex') === null){
         localStorage.setItem('favoriteIndex',JSON.stringify([]));
@@ -77,6 +71,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         $scope.groups = {};
         $scope.flag  = 'users';
         $('#firstPage').hide();
+        $('#albumsData').hide();
+        $('#postsData').hide();
+        
         //$window.location.reload();
     };
     //////////////////////////////////////////////////////////////////////////////////////////////////inputValid////////////////////////
@@ -262,9 +259,15 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     $scope.Details = function (itemId, portrait) {
         //$scope.currentTab = 'page-Detail.html';
         $scope.isDetail = true;
+        
         $scope.ngSwitchSelected = 'item2';
-        $('#loadingAlbum').show();
-        $('#loadingPosts').show();
+        $('#albumsData').hide();
+        $('#postsData').hide();
+        
+        
+
+        
+
         $scope.portrait = portrait;
         var config = {
             params: {
@@ -272,6 +275,8 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             }
         };
         $http.get("index2.php", config).then(function (response) {
+            $('#loadingAlbum').show();
+            $('#loadingPosts').show();
             $scope.detail = response.data;
             $scope.test = $scope.detail;
             //alert($scope.detail.albums.data.length);
@@ -289,12 +294,18 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             
             $('#loadingAlbum').hide();
             $('#loadingPosts').hide();
+            $('#albumsData').show();
+            $('#postsData').show();
             
         }, function errorCallback(response) {
+            $('#loadingAlbum').show();
+            $('#loadingPosts').show();
             $scope.albumNums = false;
             $scope.postsNums = false;
             $('#loadingAlbum').hide();
             $('#loadingPosts').hide();
+            $('#albumsData').show();
+            $('#postsData').show();
         });
         //$rootScope.$emit("CallParentMethod", {path:'/page4',pageAnimationClass:'slideLeft'});
     };

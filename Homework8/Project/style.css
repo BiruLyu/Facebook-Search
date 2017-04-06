@@ -75,10 +75,28 @@ button:focus,i:focus{
     background: white;
 }
 #firstProgress{
-    height: 500px;
-    width: 70%;
+    height: 50px;
+    width: 80%;
     margin: 15%;
 }
+
+#albumsProgress{
+    #height: 50px;
+    #width: 80%;
+    margin-top: 15px;
+}/*
+#postsProgress{
+    height: 300px;
+    width: 70%;
+    margin: 15%;
+    
+}
+*/
+
+a.albumClickTitle.ng-binding:hover,a.albumClickTitle.ng-binding:focus,a.albumClickTitle.ng-binding:active{
+    color: #3D5898;
+}
+
 #firstPageTable.table tr td{
     vertical-align: middle;
 }
@@ -114,6 +132,12 @@ button:focus,i:focus{
 
 #tabLine{
     margin-top: -20px;
+}
+
+p.postsTime{
+    color:#777;
+    font-size: 14px;
+    font-weight: 600;
 }
 .nav.nav-tabs{
     border-bottom: 3px solid #3D5898;
