@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-
 <head>
-    <title>AngularJS ngSwitch sample</title>
+    <title>Facebook Search</title>
     <link href="style.css" rel="stylesheet" />
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -40,17 +39,11 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
-    <div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
     <div ng-controller="animationsCtrl">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="row">
-                <div class="navbar-header col-xs-12 col-md-3"> <a class="navbar-brand" style="color:#3D5898;display:block;">FB Search</a> </div>
+                <div id="appTitle" class="navbar-header col-xs-12 col-md-3"> <a class="navbar-brand" style="color:#3D5898;display:block;">FB Search</a> </div>
 <!--                <div class="col-xs-12 col-md-10">-->
 <!--                    <div class="row">-->
 <!--                <form class="navbar-form navbar-left">-->
@@ -207,8 +200,8 @@
                              </h4> </div>
                                                     <div id="collapse1{{$index}}" class="panel-collapse collapse" ng-class="{in:$first}">
                                                         <div class="panel-body">
-                                                            <div ng-repeat="y in x.photos.data"> <img src="https://graph.facebook.com/v2.8/{{ y.id }}/picture?access_token=EAALF3VR0KV8BAJxZA0VAaZAe8SiNlqaWnZCs5RNfq6AcB9Tm3lVcI3dcZCMC4sCqVioaPzUbp6o9hSH1dizldHgwseo3UKI9WjFPlqEixJ3ZCo6YWkMfiDY6zR5cC7CvXtgXAjohkFY0nzLdMxKId29ulOKZBGFkkZD" class="img-rounded" width="100%" height="300">
-                                                                <hr> </div>
+                                                            <div ng-repeat="y in x.photos.data"> <img style="margin-bottom: 20px;"; src="https://graph.facebook.com/v2.8/{{ y.id }}/picture?access_token=EAALF3VR0KV8BAJxZA0VAaZAe8SiNlqaWnZCs5RNfq6AcB9Tm3lVcI3dcZCMC4sCqVioaPzUbp6o9hSH1dizldHgwseo3UKI9WjFPlqEixJ3ZCo6YWkMfiDY6zR5cC7CvXtgXAjohkFY0nzLdMxKId29ulOKZBGFkkZD" class="img-rounded" width="100%" height="300">
+                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>

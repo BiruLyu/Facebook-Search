@@ -25,6 +25,9 @@
         white-space: nowrap;
         overflow-y: hidden;
     }
+    #appTitle{
+        border-bottom: 1px solid #DDD;
+    }
     
 }
 @media only screen and (min-width:992px) {

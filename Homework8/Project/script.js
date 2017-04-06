@@ -105,7 +105,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                 , longitude: $scope.longitude
             }
         };
-        $http.get("index2.php", data).then(function (response) {
+        $http.get("main.php", data).then(function (response) {
             //alert(response.data);
             $scope.users = response.data.users;
             $scope.pages = response.data.pages;
@@ -274,7 +274,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                 id: itemId
             }
         };
-        $http.get("index2.php", config).then(function (response) {
+        $http.get("main.php", config).then(function (response) {
             $('#loadingAlbum').show();
             $('#loadingPosts').show();
             $scope.detail = response.data;
@@ -311,7 +311,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     };
     
     $scope.timeFormat = function(created_time){
-        return Date.parse(created_time);
+        return created_time;
     };
     
     
