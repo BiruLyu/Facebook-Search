@@ -102,14 +102,15 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     };
     //////////////////////////////////////////////////////////////////////////////////////////////////Search////////////////////////
     $scope.Search = function () {
-        $scope.isReset = false;
-        console.log($scope.keyword.$valid);
+        
         
         
         
         $('#firstPage').hide();
-        //$('#initialPage').show();
         $('#firstProgress').show();
+        //$('#initialPage').show();
+        
+        $scope.isReset = false;
         var data = {
             params: {
                 keyword: $scope.keyword
@@ -143,8 +144,14 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             else if ($scope.flag === 'groups') {
                 $scope.myTable = $scope.groups;
             }
+        
+            if ($scope.isDetail) {
+                $scope.ngSwitchSelected = 'item1';
+                $scope.isDetail = false;
+            }
+
             
-            if($scope.myTable!==undefined && $scope.myTable.paging!==undefined){
+        if($scope.myTable!==undefined && $scope.myTable.paging!==undefined){
                     if ($scope.myTable.paging.previous === undefined) {
                         //alert(1);
                         //$('#goNext').show();
@@ -160,6 +167,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                         $('#goNext').show();
                     }
                     
+                
         } else {
             $('#goPrevious').hide();
             $('#goNext').hide();
@@ -167,13 +175,26 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             
             
         }, function errorCallback(response) {
+            if ($scope.isDetail) {
+            $scope.ngSwitchSelected = 'item1';
+            $scope.isDetail = false;
+            }
             
             alert(response.data);
+            
+
+            
         });
+        
+        
+
+        
+        
+        
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////////isInputNull//////////////////////////
     $scope.isInputNull = function (){
-        console.log('Now');
+        console.log('////////////////////////////isInputNull///////////////////');
         console.log($scope.flag);
        
         if($scope.flag === 'favorites'){
@@ -182,12 +203,12 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         } else {
             console.log($scope.myTable);
             console.log(Object.keys($scope.myTable).length);
-            if( $scope.myTable === undefined || Object.keys($scope.myTable).length === 0){
-                console.log('true');
-                return true;
-            } else {
+            if( $scope.myTable !== undefined && Object.keys($scope.myTable).length > 0){
                 console.log('false');
                 return false;
+            } else {
+                console.log('true');
+                return true;
             }
         }
     };
@@ -201,6 +222,12 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     $scope.onClickTab = function (tab) {
         $('[data-toggle="tooltip"]').tooltip('destroy');
         $scope.isReset = false;
+        
+        
+        if ($scope.isDetail) {
+            $scope.ngSwitchSelected = 'item1';
+            $scope.isDetail = false;
+        }
         // $scope.currentTab = tab.url;
         //var temp2222 = 'true';
         //console.log(tab.title === $scope.flag.toLowerCase());
@@ -247,6 +274,8 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         ////////////////////////////////////////////////////////////////////////////////////////////////Favorite Page ////////////////////////////
         else if (tab.title === 'Favorites') {
             //$('.type').show();
+            
+            
             $scope.activeFavorite = true;
             var favorList = []
                 , temp = []
@@ -314,19 +343,16 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#goPrevious').hide();
             $('#goNext').hide();
         }
-        if ($scope.isDetail) {
-            $scope.ngSwitchSelected = 'item1';
-            $scope.isDetail = false;
-        }
+
         //}
 
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Details////////////////////////
-    $scope.Details = function (itemId, portrait) {
+    $scope.Details = function (itemId, portrait, flag) {
         //$scope.currentTab = 'page-Detail.html';
         $scope.isDetail = true;
-        
+        $scope.detailFlag = flag;
         $scope.ngSwitchSelected = 'item2';
         $('#albumsData').hide();
         $('#postsData').hide();

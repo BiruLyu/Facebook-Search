@@ -120,7 +120,7 @@
                                             </td>
                                             
                                             <td>
-                                                <button ng-click="Details( x.id, x.picture.data.url)" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button>
+                                                <button ng-click="Details( x.id, x.picture.data.url, flag)" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -137,7 +137,7 @@
                                             </td>
                                             <td>
 <!--                                                <button ng-click="Details(x[3], x.picture.data.url)" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button>-->
-                                                <button ng-click="Details(x[3], x[0])" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button>
+                                                <button ng-click="Details(x[3], x[0], x[2])" class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-chevron-right"></i></button>
                                             </td>
                                         </tr>
                                         
@@ -171,7 +171,7 @@
                                     <div class="col-md-6 col-xs-6">
                                         <div class="pull-right" id="favorite-and-facebook">
                                         <!--        <a href="#"><img src="https://www.sentinelsystems.ca/uploads/images/Buttons/FB_button.png" style="width: 30px ;height:30px" id="fbData"></a>-->
-                                        <button id="favoriteButton" ng-click="Favorite(detail.id, portrait, detail.name, flag)" class="btn btn-default"> <i ng-class="activeStarClass(detail.id)" ng-style="activeStarStyle(detail.id)"></i></button>
+                                        <button id="favoriteButton" ng-click="Favorite(detail.id, portrait, detail.name, detailFlag)" class="btn btn-default"> <i ng-class="activeStarClass(detail.id)" ng-style="activeStarStyle(detail.id)"></i></button>
                                         <button id="facebookButton" ng-click="postFB(portrait,detail.name)" class="btn btn-default"> <img src="http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png" style="width: 20px; height:20px" id="fbData"></button>
                                         </div>
                                         
@@ -233,7 +233,8 @@
                                                                 <h5 class="media-heading">{{detail.name}}</h5>
                                                                 <h4 class="postTime"><small class="postsTime">{{timeFormat(x.created_time) | date:'yyyy-MM-dd HH:mm:ss'}}</small></h4> </div>
                                                             <div class="media">
-                                                                <p class="mb-0">{{ x.message }}</p>
+                                                                <p ng-show= "x.message!==undefined" class="mb-0">{{ x.message }}</p>
+                                                                <p ng-show= "x.message ===undefined && x.story!==undefined" class="mb-0">{{ x.story }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
