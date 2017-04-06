@@ -160,6 +160,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                         $('#goNext').show();
                     }
                     
+        } else {
+            $('#goPrevious').hide();
+            $('#goNext').hide();
         }
             
             
@@ -307,6 +310,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                         $('#goNext').show();
                     }
                     
+        } else {
+            $('#goPrevious').hide();
+            $('#goNext').hide();
         }
         if ($scope.isDetail) {
             $scope.ngSwitchSelected = 'item1';
