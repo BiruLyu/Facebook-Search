@@ -3,11 +3,27 @@
 /*global console,$, jQuery, alert, FB*/
 
 
+angular.element(document).ready(function () {
+    "use strict";
+    $('#firstPage').hide();
 
+});
 var app = angular.module('myApp', ['ngAnimate']);
 app.controller('animationsCtrl', function ($scope, $http, $log) {
     "use strict";
-    localStorage.clear();
+    //localStorage.clear();
+    
+    
+    var init = function () {
+    // do something
+        $('#firstPage').hide();
+    };
+
+    init();
+    
+    if(localStorage.getItem('favoriteIndex') === null){
+        localStorage.setItem('favoriteIndex',JSON.stringify([]));
+    }
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             $scope.latitude = position.coords.latitude;
@@ -16,6 +32,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
             //alert($scope.longitude);
         });
     }
+    
     $scope.ngSwitchItems = ['item1', 'item2', 'item3'];
     $scope.tabs = [
         {
@@ -47,12 +64,14 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
  
     $scope.myTable = $scope.users;
     $scope.flag = 'users';
-    localStorage.setItem('favoriteIndex',JSON.stringify([]));
+
+    
     
     //////////////////////////////////////////////////////////////////////////////////////////////////Search////////////////////////
     $scope.Search = function () {
-        $('#initialPage').show();
-        $('#loadingmessage').show();
+        $('#firstPage').hide();
+        //$('#initialPage').show();
+        $('#firstProgress').show();
         var data = {
             params: {
                 keyword: $scope.keyword
@@ -67,7 +86,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
             $scope.events = response.data.events;
             $scope.places = response.data.places;
             $scope.groups = response.data.groups;
-            $('#loadingmessage').hide();
+            $('#firstProgress').hide();
+            $('#firstPage').show();
+            console.log($('#firstPage'));
             
             if ($scope.flag === 'users') {
                 $scope.myTable = $scope.users;
@@ -91,9 +112,16 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         });
     };
         ////////////////////////////////////////////////////////////////////////////////////////////////Click Tab ////////////////////////////
+    $scope.isActiveTab = function(tab){
+       // alert(tab.title);
+        //console.log($scope.flag);
+        //console.log(tab.title.toLowerCase() === $scope.flag);
+        return tab.title.toLowerCase() === $scope.flag;
+    };
     $scope.onClickTab = function (tab) {
         // $scope.currentTab = tab.url;
-        
+        //var temp2222 = 'true';
+        //console.log(tab.title === $scope.flag.toLowerCase());
         
         if (tab.title === 'Users') {
             //$('.type').hide();
@@ -133,6 +161,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
                 , temp = []
                 , tempPair = {}
                 ,favoriteIndex =[];
+            
             $scope.favorites = [];
 
             //$.each(localStorage, function (key, value) {
@@ -148,10 +177,11 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
                 // key magic
                 // value magic
             //});
+                //console.log(localStorage);
                 favoriteIndex = JSON.parse(localStorage.getItem('favoriteIndex'));
-                console.log(favoriteIndex);
+                //console.log(favoriteIndex);
                 $.each(favoriteIndex, function (key,value) {
-                    console.log(key,value);
+                    //console.log(key,value);
                     temp = JSON.parse(localStorage.getItem(value));
                     $scope.favorites.push(temp);
                 });
@@ -164,8 +194,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
 //            });
             //$scope.myTable = $scope.favorites;
             $scope.flag = 'favorites';
+            $('#firstPage').show();
         }
-        
+        $('#firstPage').show();
         if ($scope.myTable.paging.previous === undefined) {
             //alert(1);
             $('#goNext').show();
@@ -241,11 +272,27 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
                   name: name,
                   display: 'popup',
                   caption: 'FB SEARCH FROM USC CSCI571'
-                }, function(response){}); 
+                }, function(response){ 
+            if(response && (!response.error_message)){
+                alert("Posted Successfully");
+            } else {
+                alert("Not Posted");
+              }
+        });
+           
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Back/////////////////////
     $scope.Back = function () {
+        
+        
         $scope.ngSwitchSelected = 'item1';
+        $('#firstPage').show();
+        console.log($('#firstPage'));
+        
+        $scope.onClickTab({
+            title: 'Users'
+        });
+        
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////FavoriteStyle/////////////////
     $scope.activeStarStyle = function (id) {
@@ -288,9 +335,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
     $scope.Favorite = function (id, url, name, flag) {
         var a, temp = [],favoriteIndex = [];
         if (localStorage.getItem(id) === null) {
-            
+            //console.log(localStorage);
             favoriteIndex = JSON.parse(localStorage.getItem('favoriteIndex'));
-            console.log(favoriteIndex);
+            //console.log(favoriteIndex);
             favoriteIndex.push(id);
             localStorage.setItem('favoriteIndex',JSON.stringify(favoriteIndex));
             //a = '#'+id;
@@ -300,9 +347,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         }
         else {
             favoriteIndex = JSON.parse(localStorage.getItem('favoriteIndex'));
-            console.log(favoriteIndex);
+            //console.log(favoriteIndex);
             favoriteIndex.splice(favoriteIndex.indexOf(id),1);
-            console.log(favoriteIndex);
+            //console.log(favoriteIndex);
             localStorage.setItem('favoriteIndex',JSON.stringify(favoriteIndex));
             localStorage.removeItem(id);
             

@@ -1,3 +1,127 @@
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+
+
+
+@media only screen and (max-width:768px) {
+    /* styles for mobile browsers smaller than 480px; (iPhone) */
+    #clearButton {
+        margin-left: -15px;
+    }
+    #tableData{
+        border: 1px solid #CCC;
+        width: 100%;
+        display: block;
+        overflow: scroll;
+        margin-top: 20px;
+        
+    }
+    
+    #firstPageTable{
+    
+        overflow-x:auto;
+        white-space: nowrap;
+        overflow-y: hidden;
+    }
+    
+}
+@media only screen and (min-width:992px) {
+    /* styles for mobile browsers smaller than 480px; (iPhone) */
+    .nav.nav-tabs {
+        line-height: 50px;
+        height: 50px;
+    }
+    #searchButton {
+        width: 150%;
+    }
+    #clearButton {
+        margin-left: 40px;
+    }
+    #tableData{
+        margin: 10px;
+    }
+    .nav-tabs li{
+    background-color: #FFF;
+    color: black;
+    border-bottom: 3px solid #3D5898;
+
+}
+}
+button:focus,i:focus{
+    outline: none;
+}
+
+
+#previous-and-next-button{
+    text-align: center;
+}
+#goPrevious,#goNext {
+    border-radius: 7px;
+    width: 100px;
+    height: 40px;
+    margin: 15px 15px 15px 15px;
+}
+#goPrevious:hover,#goNext:hover {
+    background: white;
+}
+#searchButton:focus{
+    outline: none;
+}
+#goPrevious:focus,#goNext:focus,#clearButton:focus{
+    outline: none;
+    background: white;
+}
+#firstProgress{
+    height: 500px;
+    width: 70%;
+    margin: 15%;
+}
+#firstPageTable.table tr td{
+    vertical-align: middle;
+}
+#searchInput{
+    border-radius: 0;
+    margin: 10px;
+}
+#searchButton{
+    border-radius: 0;
+    margin: 10px;
+    background-color: #3D5898;
+    color: white;
+}
+#clearButton{
+    border-radius: 0;
+    color: #3D5898;
+    border-bottom: 1px solid #3D5898;
+    background-color: white;
+    margin-top: 10px;
+   
+}
+
+#tabLine{
+    margin-top: -20px;
+}
+.nav.nav-tabs{
+    border-bottom: 3px solid #3D5898;
+    text-align: center;
+    
+    }
+.nav-tabs li{
+    background-color: #FFF;
+    color: black;
+    
+
+}
+.nav-tabs li.tabActive {
+    background-color: #3D5898;
+    color: white;
+
+}
+
+
 .full-width-tabs > ul.nav.nav-tabs {
     display: table;
     width: 100%;
@@ -33,6 +157,11 @@
     -o-transition: 1s linear all;
     transition: 1s linear all;
 }
+
+.eachTab:hover{
+    cursor: pointer;
+}
+
 
 /* When the element is about to enter DOM*/
 #mainPage.ng-enter {
