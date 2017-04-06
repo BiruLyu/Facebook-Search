@@ -9,7 +9,7 @@ angular.element(document).ready(function () {
 
 });
 var app = angular.module('myApp', ['ngAnimate']);
-app.controller('animationsCtrl', function ($scope, $http, $log) {
+app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     "use strict";
     //localStorage.clear();
     
@@ -60,15 +60,44 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
             , content: $scope.favorites
         }
     ];
-    $scope.currentTab = 'one.tpl.html';
+    //$scope.currentTab = 'one.tpl.html';
  
     $scope.myTable = $scope.users;
     $scope.flag = 'users';
 
     
-    
+    //////////////////////////////////////////////////////////////////////////////////////////////////Reset////////////////////////
+    $scope.Reset = function(){
+        $scope.keyword = '';
+        $scope.myTable = {};
+        $scope.users = {};
+        $scope.pages = {};
+        $scope.events = {};
+        $scope.places = {};
+        $scope.groups = {};
+        $scope.flag  = 'users';
+        $('#firstPage').hide();
+        //$window.location.reload();
+    };
+    //////////////////////////////////////////////////////////////////////////////////////////////////inputValid////////////////////////
+    $scope.inputValid = function(){
+        console.log($scope.flag);
+        
+        if($scope.keyword === '' || $scope.keyword === undefined){
+            
+            $('[data-toggle="tooltip"]').tooltip('enable');
+            $('[data-toggle="tooltip"]').tooltip("show");
+            return false;
+            
+        } else {
+            $('[data-toggle="tooltip"]').tooltip('disable');
+            //$('[data-toggle="tooltip"]').tooltip('destroy');
+            return true;
+        }
+    };
     //////////////////////////////////////////////////////////////////////////////////////////////////Search////////////////////////
     $scope.Search = function () {
+        console.log($scope.keyword.$valid);
         $('#firstPage').hide();
         //$('#initialPage').show();
         $('#firstProgress').show();
@@ -122,7 +151,15 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         // $scope.currentTab = tab.url;
         //var temp2222 = 'true';
         //console.log(tab.title === $scope.flag.toLowerCase());
-        
+        if($scope.inputValid === false && tab.title !== 'Favorites'){
+            $('[data-toggle="tooltip"]').tooltip('enable');
+            $('[data-toggle="tooltip"]').tooltip("show");
+        } else {
+        if($scope.keyword === '' || $scope.keyword === undefined ){
+            $('#firstPage').hide();
+        } else {
+            $('#firstPage').show();
+        }
         if (tab.title === 'Users') {
             //$('.type').hide();
             $scope.activeFavorite = false;
@@ -195,8 +232,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
             //$scope.myTable = $scope.favorites;
             $scope.flag = 'favorites';
             $('#firstPage').show();
+            
         }
-        $('#firstPage').show();
+        
         if ($scope.myTable.paging.previous === undefined) {
             //alert(1);
             $('#goNext').show();
@@ -215,6 +253,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log) {
         if ($scope.isDetail) {
             $scope.ngSwitchSelected = 'item1';
             $scope.isDetail = false;
+        }
         }
 
     };

@@ -21,7 +21,6 @@
     }
     
     #firstPageTable{
-    
         overflow-x:auto;
         white-space: nowrap;
         overflow-y: hidden;
@@ -47,13 +46,14 @@
     background-color: #FFF;
     color: black;
     border-bottom: 3px solid #3D5898;
-
-}
+    }
+    #favorite-and-facebook{
+        margin-right: -25px;
+    }
 }
 button:focus,i:focus{
     outline: none;
 }
-
 
 #previous-and-next-button{
     text-align: center;
@@ -99,6 +99,17 @@ button:focus,i:focus{
     background-color: white;
     margin-top: 10px;
    
+}
+#firstRowDetail{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#favoriteButton{
+    margin-right: 15px;
+}
+#facebookButton{
+    margin-left: 15px;
 }
 
 #tabLine{

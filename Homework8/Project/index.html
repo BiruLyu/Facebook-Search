@@ -56,13 +56,15 @@
 <!--                <form class="navbar-form navbar-left">-->
                     <div class = "col-xs-8 col-md-5">
                     <div id="searchGroup" class="input-group">
-                        <input id="searchInput" type="text" ng-model="keyword" class="form-control" placeholder="type something..." name="keyword">
+                        
+                        <input id="searchInput" type="text" ng-model="keyword" data-toggle="tooltip" data-placement="bottom" title="Please type a keyword" class="form-control" placeholder="type something..." name="keyword" required>
                         <div class="input-group-btn">
-                            <button id="searchButton" class="btn btn-default" ng-click="Search()" type="submit"> <i class="glyphicon glyphicon-search"></i> </button>
+                            <button id="searchButton" class="btn btn-default" ng-click="inputValid() && Search()" type="submit"> <i class="glyphicon glyphicon-search"></i> </button>
                         </div>
+                        
                     </div>
                     </div>
-                    <div class="col-xs-4 col-md-4"><button id="clearButton" type="Reset" class="btn btn-default btn-primary">Clear</button></div>
+                    <div class="col-xs-4 col-md-4"><button id="clearButton" type="Reset" class="btn btn-default btn-primary" ng-click="Reset()">Clear</button></div>
                    
 <!--                </form>-->
                     
@@ -161,22 +163,29 @@
                 </div>
             </div>
             <div class="switchItem" id="detailPage" ng-switch-when="item2">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
-                            <div id="page-Favorites" class="pages">
-                                <div class="row col-md-12 column bg-danger">
-                                    <div class="col-md-2 col-sm-4 col-xs-6 ">
+                            <div id="secondPage" class="pages">
+                                <div class="row col-md-12 column">
+                                    <div id = "firstRowDetail"class="row">
+                                    <div class="col-md-6 col-xs-6">
                                         <button class="btn btn-default" type="submit" ng-click="Back()"> <i class="glyphicon glyphicon-chevron-left"></i>Back</button>
                                     </div>
-                                    <div class="col-md-2 col-md-offset-8">
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="pull-right" id="favorite-and-facebook">
                                         <!--        <a href="#"><img src="https://www.sentinelsystems.ca/uploads/images/Buttons/FB_button.png" style="width: 30px ;height:30px" id="fbData"></a>-->
-                                        <button ng-click="Favorite(detail.id, portrait, detail.name, flag)" class="btn btn-default pull-right" type="submit"> <i ng-class="activeStarClass(detail.id)" ng-style="activeStarStyle(detail.id)"></i></button>
-                                        <button ng-click="postFB(portrait,detail.name)" class="btn btn-default pull-right" type="submit"> <img src="http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png" style="width: 20px ;height:20px" id="fbData"></button>
+                                        <button id="favoriteButton" ng-click="Favorite(detail.id, portrait, detail.name, flag)" class="btn btn-default"> <i ng-class="activeStarClass(detail.id)" ng-style="activeStarStyle(detail.id)"></i></button>
+                                        <button id="facebookButton" ng-click="postFB(portrait,detail.name)" class="btn btn-default"> <img src="http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png" style="width: 20px; height:20px" id="fbData"></button>
+                                        </div>
+                                        
+                                        
                                         <!--        <button style="height: 30px" id="starBat"><i class="icon-star-empty icon-large icon-a " id="starElement"></i></button>-->
                                     </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 column">
+                                <div class="row">
+                                <div class="col-md-6 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h3 class="panel-title">Albums</h3></div>
@@ -202,7 +211,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 column">
+                                <div class="col-md-6 col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h3 class="panel-title">Posts</h3></div>
@@ -228,6 +237,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
