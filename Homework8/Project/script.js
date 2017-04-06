@@ -144,6 +144,25 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                 $scope.myTable = $scope.groups;
             }
             
+            if($scope.myTable!==undefined && $scope.myTable.paging!==undefined){
+                    if ($scope.myTable.paging.previous === undefined) {
+                        //alert(1);
+                        //$('#goNext').show();
+                        $('#goPrevious').hide();
+                    } else {
+                        $('#goPrevious').show();
+                    }
+                    if ($scope.myTable.paging.next === undefined || $scope.myTable.data.length < 25) {
+                        //alert(2);
+                        $('#goNext').hide();
+                        //$('#goPrevious').show();
+                    } else {
+                        $('#goNext').show();
+                    }
+                    
+        }
+            
+            
         }, function errorCallback(response) {
             
             alert(response.data);
@@ -272,21 +291,22 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#firstPage').hide();
         }
         if($scope.myTable!==undefined && $scope.myTable.paging!==undefined){
-        if ($scope.myTable.paging.previous === undefined) {
-            //alert(1);
-            $('#goNext').show();
-            $('#goPrevious').hide();
-        }
-        else if ($scope.myTable.paging.next === undefined) {
-            //alert(2);
-            $('#goNext').hide();
-            $('#goPrevious').show();
-        }
-        else {
-            //alert(3);
-            $('#goNext').show();
-            $('#goPrevious').show();
-        }
+                   
+                    if ($scope.myTable.paging.previous === undefined) {
+                        //alert(1);
+                        //$('#goNext').show();
+                        $('#goPrevious').hide();
+                    } else {
+                        $('#goPrevious').show();
+                    }
+                    if ($scope.myTable.paging.next === undefined || $scope.myTable.data.length < 25) {
+                        //alert(2);
+                        $('#goNext').hide();
+                        //$('#goPrevious').show();
+                    } else {
+                        $('#goNext').show();
+                    }
+                    
         }
         if ($scope.isDetail) {
             $scope.ngSwitchSelected = 'item1';
@@ -473,21 +493,24 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
 //            else if (Flag === 'favorites') {
 //                $scope.favorites = $scope.favorites;
 //            }
-            if ($scope.myTable.paging.previous === undefined) {
-                //alert(1);
-                $('#goNext').show();
-                $('#goPrevious').hide();
-            }
-            else if ($scope.myTable.paging.next === undefined || $scope.myTable.data.length < 25) {
-                //alert(2);
-                $('#goNext').hide();
-                $('#goPrevious').show();
-            }
-            else {
-                //alert(3);
-                $('#goNext').show();
-                $('#goPrevious').show();
-            }
+            
+            if($scope.myTable!==undefined && $scope.myTable.paging!==undefined){
+        if ($scope.myTable.paging.previous === undefined) {
+                        //alert(1);
+                        $('#goNext').show();
+                        $('#goPrevious').hide();
+                    }
+                    else if ($scope.myTable.paging.next === undefined || $scope.myTable.data.length < 25) {
+                        //alert(2);
+                        $('#goNext').hide();
+                        $('#goPrevious').show();
+                    }
+                    else {
+                        //alert(3);
+                        $('#goNext').show();
+                        $('#goPrevious').show();
+                    }
+        }
         });
     };
 });
