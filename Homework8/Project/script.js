@@ -384,6 +384,8 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         
         
 
+        if($scope.flag !== 'events'){
+            
         
 
         $scope.portrait = portrait;
@@ -392,6 +394,8 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                 id: itemId
             }
         };
+        
+        
         $http.get("main.php", config).then(function (response) {
             $('#loadingAlbum').show();
             $('#loadingPosts').show();
@@ -424,7 +428,14 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#loadingPosts').hide();
             $('#albumsData').show();
             $('#postsData').show();
-        });
+        });} else {
+            $('#loadingAlbum').hide();
+            $('#loadingPosts').hide();
+            $scope.albumNums = false;
+            $scope.postsNums = false;
+            $('#albumsData').show();
+            $('#postsData').show();
+        }
         //$rootScope.$emit("CallParentMethod", {path:'/page4',pageAnimationClass:'slideLeft'});
     };
     
