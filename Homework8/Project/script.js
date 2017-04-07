@@ -113,6 +113,12 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         
         
         
+                if ($scope.isDetail) {
+            //$scope.ngSwitchSelected = 'item1';
+            $scope.mainPageShow = true;
+            $scope.detailPageShow = false;
+            $scope.isDetail = false;
+        }
         
         $('#firstPage').hide();
         $('#firstProgress').show();
@@ -153,12 +159,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
                 $scope.myTable = $scope.groups;
             }
         
-            if ($scope.isDetail) {
-                //$scope.ngSwitchSelected = 'item1';
-                $scope.mainPageShow = true;
-                $scope.detailPageShow = false;
-                $scope.isDetail = false;
-            }
+
 
             
         if($scope.myTable!==undefined && $scope.myTable.paging!==undefined){
@@ -185,13 +186,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             
             
         }, function errorCallback(response) {
-            if ($scope.isDetail) {
-            //$scope.ngSwitchSelected = 'item1';
-            $scope.mainPageShow = true;
-            $scope.detailPageShow = false;
-            $scope.isDetail = false;
-            }
-            
+
             alert(response.data);
             
 
