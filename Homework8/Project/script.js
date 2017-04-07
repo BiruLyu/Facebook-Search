@@ -385,7 +385,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         
         
 
-        if($scope.flag !== 'events'){
+        if(flag !== 'events'){
             
         
 
@@ -432,7 +432,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#postsData').show();
             $('#favorite-and-facebook').show();
         });} else {
+            console.log('/////////////////////EventDetail////////////////');
             $scope.detail = {id:itemId,name:name};
+            console.log($scope.detail);
             $('#loadingAlbum').hide();
             $('#loadingPosts').hide();
             $scope.albumNums = false;
