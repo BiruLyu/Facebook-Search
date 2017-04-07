@@ -358,7 +358,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Details////////////////////////
-    $scope.Details = function (itemId, portrait, flag) {
+    $scope.Details = function (itemId, portrait, flag, name) {
         
         $scope.mainPageShow = false;
         $scope.detailPageShow = true;
@@ -372,6 +372,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         
         $('#albumsData').hide();
         $('#postsData').hide();
+        $('#favorite-and-facebook').hide();
         $('#loadingAlbum').show();
         $('#loadingPosts').show();
         
@@ -418,6 +419,7 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#loadingPosts').hide();
             $('#albumsData').show();
             $('#postsData').show();
+            $('#favorite-and-facebook').show();
             
         }, function errorCallback(response) {
             $('#loadingAlbum').show();
@@ -428,13 +430,16 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             $('#loadingPosts').hide();
             $('#albumsData').show();
             $('#postsData').show();
+            $('#favorite-and-facebook').show();
         });} else {
+            $scope.detail = {id:itemId,name:name};
             $('#loadingAlbum').hide();
             $('#loadingPosts').hide();
             $scope.albumNums = false;
             $scope.postsNums = false;
             $('#albumsData').show();
             $('#postsData').show();
+            $('#favorite-and-facebook').show();
         }
         //$rootScope.$emit("CallParentMethod", {path:'/page4',pageAnimationClass:'slideLeft'});
     };
