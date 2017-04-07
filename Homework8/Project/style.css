@@ -195,72 +195,92 @@ p.postsTime{
     overflow: hidden;
 }
 
-.switchItem {
-    position: absolute;
-    width: 100%;
-    display: block;
-}
-/*The transition is added when the switch item (id === mainPage )is about to enter or about to leave DOM*/
-#mainPage.ng-enter,
-#mainPage.ng-leave {
-    -webkit-transition: 1s linear all;
-    -moz-transition: 1s linear all;
-    -ms-transition: 1s linear all;
-    -o-transition: 1s linear all;
-    transition: 1s linear all;
-}
+
 
 .eachTab:hover{
     cursor: pointer;
 }
 
 
-/* When the element is about to enter DOM*/
-#mainPage.ng-enter {
-    left: 100%;
+
+#mainPage.ng-hide-add { 
+  -webkit-transition:all 1.5s linear;
+  -moz-transition:all 1.5s linear;
+  -ms-transition:all 1.5s linear;
+  -o-transition:all 1.5s linear;
+   transition:all 1.5s linear;
+   position: relative;
+   right:-100%;
+}
+#mainPage.ng-hide-add.ng-hide-add-active { 
+    #left:0;
+    display:none;!important
+    
+}
+#mainPage.ng-hide-remove { 
+  -webkit-transition:all 1.5s linear;
+  -moz-transition:all 1.5s linear;
+  -ms-transition:all 1.5s linear;
+  -o-transition:all 1.5s linear;
+   transition:all 1.5s linear;
+   position: relative;
+   right:-100%;
+}
+#mainPage.ng-hide-remove.ng-hide-remove-active { 
+   right: 0;
+   
 }
 
-/* When the element completes the enter transition */
-#mainPage.ng-enter-active {
-    left: 0;
+#detailPage.ng-hide-add { 
+  -webkit-transition:all 1.5s linear;
+  -moz-transition:all 1.5s linear;
+  -ms-transition:all 1.5s linear;
+  -o-transition:all 1.5s linear;
+   transition:all 1.5s linear;
+   position: relative;
+   left:100%;
 }
-/* When the element is about to leave DOM*/
-#mainPage.ng-leave {
-    right: 0;
-    visibility: hidden;
-}
-/*When the element end the leave transition*/
-#mainPage.ng-leave-active {
+#detailPage.ng-hide-add.ng-hide-add-active { 
 
-   visibility: hidden;
+    display:none;!important
+    
+}
+#detailPage.ng-hide-remove { 
+
+  -webkit-transition:all 1.5s linear;
+  -moz-transition:all 1.5s linear;
+  -ms-transition:all 1.5s linear;
+  -o-transition:all 1.5s linear;
+   transition:all 1.5s linear;
+   position: relative;
+   left:100%;
+}
+#detailPage.ng-hide-remove.ng-hide-remove-active { 
+   left: 0;
 }
 
-/*The transition is added when the switch item (id === detailPage )is about to enter or about to leave DOM*/
-#detailPage.ng-enter,
-#detailPage.ng-leave {
-    -webkit-transition: 1s linear all;
-    -moz-transition: 1s linear all;
-    -ms-transition: 1s linear all;
-    -o-transition: 1s linear all;
-    transition: 1s linear all;
+/*
+#mainPage.ng-hide-add, #detailPage.ng-hide-remove{ 
+
+  -webkit-transition:all 2s linear;
+  -moz-transition:all 2s linear;
+  -ms-transition:all 2s linear;
+  -o-transition:all 2s linear;
+   transition:all 2s linear;
+   position: relative;
+   left:0;
 }
 
-/* When the element is about to enter DOM*/
-#detailPage.ng-enter {
+#detailPage.ng-hide-add.ng-hide-add-active { 
+    display: none;
     right: 100%;
 }
 
-/* When the element completes the enter transition */
-#detailPage.ng-enter-active {
+#detailPage.ng-hide-remove.ng-hide-remove-active { 
     right: 0;
 }
-/* When the element is about to leave DOM*/
-#detailPage.ng-leave {
-    right: 0;
-    visibility: hidden;
-}
-/*When the element end the leave transition*/
-#detailPage.ng-leave-active {
+*/
 
-   visibility: hidden;
-}
+
+
+

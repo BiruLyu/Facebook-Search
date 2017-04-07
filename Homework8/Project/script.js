@@ -9,11 +9,15 @@ angular.element(document).ready(function () {
     $('#albumsData').hide();
     $('#postsData').hide();
     
+    
 });
 var app = angular.module('myApp', ['ngAnimate']);
 app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     "use strict";
     //localStorage.clear();
+    
+    $scope.mainPageShow = true;
+    $scope.detailPageShow = false;
     
     $scope.isReset = false;
     if(localStorage.getItem('favoriteIndex') === null){
@@ -66,7 +70,11 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         
         $('[data-toggle="tooltip"]').tooltip('destroy');
         if ($scope.isDetail) {
-            $scope.ngSwitchSelected = 'item1';
+            //$scope.ngSwitchSelected = 'item1';
+            
+            $scope.mainPageShow = true;
+            $scope.detailPageShow = false;
+        
             $scope.isDetail = false;
         }
         $scope.isReset = true;
@@ -146,7 +154,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             }
         
             if ($scope.isDetail) {
-                $scope.ngSwitchSelected = 'item1';
+                //$scope.ngSwitchSelected = 'item1';
+                $scope.mainPageShow = true;
+                $scope.detailPageShow = false;
                 $scope.isDetail = false;
             }
 
@@ -176,7 +186,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
             
         }, function errorCallback(response) {
             if ($scope.isDetail) {
-            $scope.ngSwitchSelected = 'item1';
+            //$scope.ngSwitchSelected = 'item1';
+            $scope.mainPageShow = true;
+            $scope.detailPageShow = false;
             $scope.isDetail = false;
             }
             
@@ -225,7 +237,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
         
         
         if ($scope.isDetail) {
-            $scope.ngSwitchSelected = 'item1';
+            //$scope.ngSwitchSelected = 'item1';
+            $scope.mainPageShow = true;
+            $scope.detailPageShow = false;
             $scope.isDetail = false;
         }
         // $scope.currentTab = tab.url;
@@ -350,12 +364,28 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Details////////////////////////
     $scope.Details = function (itemId, portrait, flag) {
+        
+        $scope.mainPageShow = false;
+        $scope.detailPageShow = true;
         //$scope.currentTab = 'page-Detail.html';
         $scope.isDetail = true;
         $scope.detailFlag = flag;
-        $scope.ngSwitchSelected = 'item2';
+        //$scope.ngSwitchSelected = 'item2';
+        
+        
+        
+        
         $('#albumsData').hide();
         $('#postsData').hide();
+        $('#loadingAlbum').show();
+        $('#loadingPosts').show();
+        
+        
+        
+//        $('#albumsData').hide();
+//        $('#postsData').hide();
+//        $('#loadingAlbum').show();
+//        $('#loadingPosts').show();
         
         
 
@@ -428,7 +458,9 @@ app.controller('animationsCtrl', function ($scope, $http, $log, $window) {
     $scope.Back = function () {
         
         
-        $scope.ngSwitchSelected = 'item1';
+        //$scope.ngSwitchSelected = 'item1';
+        $scope.mainPageShow = true;
+        $scope.detailPageShow = false;
         //$('#firstPage').show();
         console.log($('#firstPage'));
         
