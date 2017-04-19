@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FacebookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fJj-Tu-uhP">
+                                <rect key="frame" x="16" y="216" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Zj-iu-CUP">
+                                <rect key="frame" x="72" y="269" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clear"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xm-Ii-D9y">
+                                <rect key="frame" x="191" y="269" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <segue destination="GJk-qM-s8r" kind="show" id="TyS-X9-u9x"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nIi-up-Py9">
+                                <rect key="frame" x="0.0" y="27" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="FB Search" id="jwd-mI-1wd">
+                                        <barButtonItem key="leftBarButtonItem" image="menu.png" style="done" id="4dw-fu-3OK"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="136.26760563380282"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="oa7-5T-LKh">
+            <objects>
+                <viewController id="CJG-Re-dma" userLabel="Events" customClass="EventsViewController" customModule="FacebookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uav-Yn-qLl"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dgo-Et-ilb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wx0-4q-wJo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2kI-bl-Jzn">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Search Results" id="3Vz-Wx-Hvq">
+                                        <barButtonItem key="leftBarButtonItem" image="menu.png" style="done" id="68d-ik-GFZ"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Events" image="event.png" id="x6g-Nn-keK" userLabel="Events"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HBx-XS-QWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-793" y="2211"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="k1i-vT-cYA">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OyR-Jb-n47" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="dMz-cx-yvx" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Root View Controller" id="fhl-jn-akS"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-403" y="3184"/>
+        </scene>
+        <!--Places-->
+        <scene sceneID="FZC-MR-9VB">
+            <objects>
+                <viewController id="1Gw-gx-OYr" userLabel="Places" customClass="PagesViewController" customModule="FacebookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hpU-FI-3WC"/>
+                        <viewControllerLayoutGuide type="bottom" id="EbN-B3-L4R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="j1g-Sf-fIS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvd-9x-MTp">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Search Results" id="Z8A-o4-6Ji">
+                                        <barButtonItem key="leftBarButtonItem" image="menu.png" style="done" id="DdZ-Sa-t4U"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Places" image="place.png" id="bUv-WW-HgA" userLabel="Places"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JzW-a7-a2w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-11" y="2214"/>
+        </scene>
+        <!--Groups-->
+        <scene sceneID="Ms1-4P-cBN">
+            <objects>
+                <viewController id="rNY-cW-uBV" userLabel="Groups" customClass="GroupsViewController" customModule="FacebookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xRY-M0-aQv"/>
+                        <viewControllerLayoutGuide type="bottom" id="hdn-V1-rFj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tq9-r0-QJv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Places" image="groups.png" id="Evh-FB-U7h" userLabel="Groups"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wUt-qb-t1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="731" y="2210"/>
+        </scene>
+        <!--Pages-->
+        <scene sceneID="ocj-l1-Ks1">
+            <objects>
+                <viewController id="7TV-yN-Y33" userLabel="Pages" customClass="PagesViewController" customModule="FacebookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qey-mu-s8e"/>
+                        <viewControllerLayoutGuide type="bottom" id="pZa-YO-yxj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jWn-1g-Uhz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOE-TZ-x1h">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Search Results" id="1kg-AI-7Cf">
+                                        <barButtonItem key="leftBarButtonItem" image="menu.png" style="done" id="IjY-et-sP6"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Pages" image="page.png" id="eLk-lX-SjY" userLabel="Pages"/>
+                    <navigationItem key="navigationItem" id="dAh-M2-JYE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFP-Ak-28e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1569" y="2211"/>
+        </scene>
+        <!--Users-->
+        <scene sceneID="C23-FE-5hm">
+            <objects>
+                <viewController id="Ea2-Ah-oGa" userLabel="Users" customClass="UsersViewController" customModule="FacebookSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TeW-Lp-6hP"/>
+                        <viewControllerLayoutGuide type="bottom" id="zJ4-Je-CSg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c0Y-gm-qXQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QAO-ba-LOa">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Search Results" id="4aY-pi-47v">
+                                        <barButtonItem key="leftBarButtonItem" image="menu.png" style="done" id="uKd-Jj-yft"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Users" image="users.png" id="eoc-HC-Xmd" userLabel="Users"/>
+                    <navigationItem key="navigationItem" id="IH5-1M-pUM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dXU-3W-zmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2376" y="2211"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="jtX-ye-Mvq">
+            <objects>
+                <tabBarController id="GJk-qM-s8r" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="6oc-uN-luB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Ea2-Ah-oGa" kind="relationship" relationship="viewControllers" id="KdT-cm-tUg"/>
+                        <segue destination="7TV-yN-Y33" kind="relationship" relationship="viewControllers" id="EEL-QF-MyH"/>
+                        <segue destination="CJG-Re-dma" kind="relationship" relationship="viewControllers" id="4UP-pm-NUi"/>
+                        <segue destination="1Gw-gx-OYr" kind="relationship" relationship="viewControllers" id="Ezl-zz-Cn0"/>
+                        <segue destination="rNY-cW-uBV" kind="relationship" relationship="viewControllers" id="Vlh-f8-Mwp"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="utd-X0-wFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1196" y="1229"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="event.png" width="30" height="30"/>
+        <image name="groups.png" width="30" height="30"/>
+        <image name="menu.png" width="30" height="30"/>
+        <image name="page.png" width="30" height="30"/>
+        <image name="place.png" width="30" height="30"/>
+        <image name="users.png" width="30" height="30"/>
+    </resources>
+</document>
