@@ -25,6 +25,9 @@ class UsersViewController: UIViewController, UITableViewDataSource {
     var Next = ""
     
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    
+    
     @IBOutlet weak var UsersTable: UITableView!
     
     @IBOutlet weak var btnPrevious: UIButton!
@@ -40,16 +43,15 @@ class UsersViewController: UIViewController, UITableViewDataSource {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.sideMenus()
+        
         // Do any additional setup after loading the view.
         SwiftSpinner.show("Loading data...")
         
         ////////////////// Ajax Call
         let url = "https://helloworld-163003.appspot.com/?Users="+keyword
         self.loadData(url: url)
-        
-
-        
         
     }
 
@@ -58,7 +60,6 @@ class UsersViewController: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = UITableViewCell()
@@ -158,6 +159,17 @@ class UsersViewController: UIViewController, UITableViewDataSource {
             }
         }
         
+    }
+    
+    func sideMenus() {
+        if revealViewController() != nil {
+            menuButton.target = revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            revealViewController().rearViewRevealWidth = 275
+            revealViewController().rightViewRevealWidth = 160
+            
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     /*
     // MARK: - Navigation

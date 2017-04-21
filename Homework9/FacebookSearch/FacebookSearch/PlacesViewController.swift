@@ -18,6 +18,8 @@ class PlacesViewController: UIViewController, UITableViewDataSource {
     
     var placeList : [tableCellData] = []
 
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    
     @IBOutlet weak var PlacesTable: UITableView!
     
     var Previous = ""
@@ -36,6 +38,8 @@ class PlacesViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.sideMenus()
         
         SwiftSpinner.show("Loading data...")
         
@@ -144,6 +148,17 @@ class PlacesViewController: UIViewController, UITableViewDataSource {
         
     }
 
+    
+    func sideMenus() {
+        if revealViewController() != nil {
+            menuButton.target = revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            revealViewController().rearViewRevealWidth = 275
+            revealViewController().rightViewRevealWidth = 160
+            
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
     
 
     /*

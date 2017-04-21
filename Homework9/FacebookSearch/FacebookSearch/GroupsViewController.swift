@@ -20,6 +20,8 @@ class GroupsViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var GroupsTable: UITableView!
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    
     var Previous = ""
     var Next = ""
     
@@ -40,6 +42,8 @@ class GroupsViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.sideMenus()
         
         SwiftSpinner.show("Loading data...")
         
@@ -145,6 +149,18 @@ class GroupsViewController: UIViewController, UITableViewDataSource {
         }
         
     }
+    
+    func sideMenus() {
+        if revealViewController() != nil {
+            menuButton.target = revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            revealViewController().rearViewRevealWidth = 275
+            revealViewController().rightViewRevealWidth = 160
+            
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
 
     /*
     // MARK: - Navigation

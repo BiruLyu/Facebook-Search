@@ -28,6 +28,8 @@
 		CBEF577B1EA8994D007421CD /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEF577A1EA8994D007421CD /* CustomTableViewCell.swift */; };
 		CBEF577E1EA89D00007421CD /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEF577C1EA89D00007421CD /* empty.png */; };
 		CBEF577F1EA89D00007421CD /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = CBEF577D1EA89D00007421CD /* favorite.png */; };
+		CBEF57851EA9EE20007421CD /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEF57841EA9EE20007421CD /* SWRevealViewController.m */; };
+		CBEF57871EAA0F9F007421CD /* AboutMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBEF57861EAA0F9F007421CD /* AboutMe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,10 @@
 		CBEF577A1EA8994D007421CD /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		CBEF577C1EA89D00007421CD /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		CBEF577D1EA89D00007421CD /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
+		CBEF57821EA9EE1F007421CD /* FacebookSearch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FacebookSearch-Bridging-Header.h"; sourceTree = "<group>"; };
+		CBEF57831EA9EE20007421CD /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		CBEF57841EA9EE20007421CD /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		CBEF57861EAA0F9F007421CD /* AboutMe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutMe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,7 @@
 			children = (
 				CB99067D1EA74970008F2C54 /* AppDelegate.swift */,
 				CB99067F1EA74970008F2C54 /* ViewController.swift */,
+				CBEF57861EAA0F9F007421CD /* AboutMe.swift */,
 				CB6EBDE41EA75D5C004BA92B /* UsersViewController.swift */,
 				CB6EBDE61EA75DF7004BA92B /* PagesViewController.swift */,
 				CB6EBDE81EA75E13004BA92B /* EventsViewController.swift */,
@@ -129,6 +136,9 @@
 				CB9906891EA74970008F2C54 /* Info.plist */,
 				CBEF57761EA86817007421CD /* tableCellData.swift */,
 				CBEF577A1EA8994D007421CD /* CustomTableViewCell.swift */,
+				CBEF57831EA9EE20007421CD /* SWRevealViewController.h */,
+				CBEF57841EA9EE20007421CD /* SWRevealViewController.m */,
+				CBEF57821EA9EE1F007421CD /* FacebookSearch-Bridging-Header.h */,
 			);
 			path = FacebookSearch;
 			sourceTree = "<group>";
@@ -169,6 +179,7 @@
 					CB9906791EA74970008F2C54 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 2X7S7S93K6;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -268,10 +279,12 @@
 				CBEF577B1EA8994D007421CD /* CustomTableViewCell.swift in Sources */,
 				CBEF57771EA86817007421CD /* tableCellData.swift in Sources */,
 				CB6EBDED1EA75E2F004BA92B /* GroupsViewController.swift in Sources */,
+				CBEF57871EAA0F9F007421CD /* AboutMe.swift in Sources */,
 				CB6EBDEB1EA75E24004BA92B /* PlacesViewController.swift in Sources */,
 				CB9906801EA74970008F2C54 /* ViewController.swift in Sources */,
 				CB6EBDE51EA75D5C004BA92B /* UsersViewController.swift in Sources */,
 				CB99067E1EA74970008F2C54 /* AppDelegate.swift in Sources */,
+				CBEF57851EA9EE20007421CD /* SWRevealViewController.m in Sources */,
 				CB6EBDE71EA75DF7004BA92B /* PagesViewController.swift in Sources */,
 				CB6EBDE91EA75E13004BA92B /* EventsViewController.swift in Sources */,
 			);
@@ -395,11 +408,14 @@
 			baseConfigurationReference = 49B43EB91F51B11DBD602AB4 /* Pods-FacebookSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 2X7S7S93K6;
 				INFOPLIST_FILE = FacebookSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.birulyu.FacebookSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FacebookSearch/FacebookSearch-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -409,11 +425,13 @@
 			baseConfigurationReference = 8856A9C519C9CFCFCFFE71BE /* Pods-FacebookSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 2X7S7S93K6;
 				INFOPLIST_FILE = FacebookSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.birulyu.FacebookSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FacebookSearch/FacebookSearch-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
