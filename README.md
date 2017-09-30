@@ -38,7 +38,9 @@ A HTML/JavaScript program, which takes the URLof an XML document containing US A
 
 # <a name = "server-side-scripting"></a> Server-side Scripting
 
-🐌 [Source Code]()
+🐌 [Source Code](https://github.com/BiruLyu/Facebook-Search/tree/master/03.Server-side%20Scripting)
+
+👉🏻 **Youtube** :  https://youtu.be/tWu2b3324Bk
 
 Created a webpage that allows you to search for informationabout a set of Facebook entities (i.e., users, pages, events, places, and groups) using theFacebook Graph API, and the results will be displayed in a tabular format.
 
@@ -46,11 +48,10 @@ Created a webpage that allows you to search for informationabout a set of Facebo
 
 ![](https://ws2.sinaimg.cn/large/006tNc79gy1fk25d8lafyj30no0dcwi2.jpg)
 
-👉🏻 **Youtube** :  https://youtu.be/tWu2b3324Bk
-
 # <a name = "responsive-web-design"></a>Responsive Web Design
 
 🐌 [Source Code](https://github.com/BiruLyu/Facebook-Search/tree/master/04.Facebook%20Graph%20Search)
+👉🏻 **Youtube** :  https://www.youtube.com/watch?v=jFei-CCluAw
 
 Created a webpage that allows users to query aboutusers, pages, groups, events and places. A PHP script is deployed on Google Cloud App Engine to return a JSON formatted datastream to the front-end. The client parses the JSON data and renders it in a nicer-looking, responsive UI(using Bootstrap).
 
@@ -62,6 +63,7 @@ Created a webpage that allows users to query aboutusers, pages, groups, events a
 # <a name = "good-looking-ios-app"></a> Good-looking iOS App
 
 🐌 [Source Code](https://github.com/BiruLyu/Facebook-Search/tree/master/05.FB%20Search)
+👉🏻 **Youtube** :  https://www.youtube.com/watch?v=L-pA_FdJy6s
 
 In this part, I developed an iOS Mobile application, which will have following functionality:
 
