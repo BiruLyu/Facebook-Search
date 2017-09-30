@@ -1,0 +1,189 @@
+<html>
+
+<head>
+    <style>
+        .Burron {
+            height: 20px;
+            margin-left: 43%;
+            margin-top: 27px;
+            background-color: #C0C0C0;
+            border-radius: 6px;
+            border: 1px;
+        }
+        
+        .Burron:active {
+            color: white;
+        }
+    </style>
+    <title>View Aircraft</title>
+    <!--
+This is for USC disclaimer
+</BODY>
+-->
+    <script>
+        function generateHTML(xmlDoc) {
+            try {
+                ELEMENT_NODE = 1; // MS parser doesn't define Node.ELEMENT_NODE
+                root = xmlDoc.DocumentElement;
+                html_text = "<html><head><title>XML Parse Result</title></head><body>";
+                html_text += "<table border='2'  width:100%;>";
+                planes = xmlDoc.getElementsByTagName("Header");
+                planeNodeList = planes.item(0).childNodes;
+                html_text += "<tbody>";
+                html_text += "<tr>";
+                x = 0;
+                y = 0;
+                // output the headers
+                var Subtages = ["Airline", "IATA", "Hubs", "Notes", "HomePage", "Plane"];
+                
+                if (planes.item(0).children.length != 6) {
+                    html_text = "";
+                    throw "Header Missing!";
+                    return;
+                }
+                for (i = 0; i < planeNodeList.length; i++) {
+                    if (planeNodeList.item(i).nodeType == ELEMENT_NODE) {
+                        header = planeNodeList.item(i).innerHTML.trim();
+                        if (header == "") throw "Header cannot be empty";
+                        html_text += "<th>" + header + "</th>";
+                    }
+                }
+                html_text += "</tr>";
+                // output out the values
+                Rows = xmlDoc.getElementsByTagName("Row");
+                if (Rows.length < 1) {
+                    html_text = "";
+                    throw "No airline!";
+                    return;
+                }
+                for (i = 0; i < Rows.length; i++) //do for all planes
+                {
+                    RowElement = Rows[i].children;
+                    if(RowElement.length != 6){
+                        throw "Error in XML!";
+                    }
+                    html_text += "<tr>";
+                    for (k = 0; k < RowElement.length; k++) {
+                        if (RowElement[k].children.length != 0) {
+                            childlist = RowElement[k].children;
+                            html_text += "<td><ul>";
+                            for (j = 0; j < childlist.length; j++) {
+                                if (j == 0) {
+                                    html_text += "<li style = 'font-weight:bold;'>";
+                                }
+                                else {
+                                    html_text += "<li>";
+                                }
+                                html_text += childlist[j].innerHTML.trim();
+                                html_text += "</li>";
+                            }
+                            html_text += "</ul></td>";
+                        } //if
+                        else {
+                            if (k == RowElement.length - 1) {
+                                if(RowElement[k].firstChild){
+                                html_text += "<td><img src='" + RowElement[k].firstChild.nodeValue + "' width='" + 240 + "' height='" + 110 + "'></td>";
+                                }
+                                else{
+                                    html_text += "<td style = 'width:240px; height:110px;' >" + "</td>";
+                                }
+                            }
+                            else if (k == RowElement.length - 2) {
+                                if(RowElement[k].firstChild){
+                                html_text += "<td><a href ='" + RowElement[k].firstChild.nodeValue + "'>" + RowElement[k].firstChild.nodeValue + "</a></td>";
+                                }
+                                else{
+                                    
+                                    html_text += "<td>" + "</td>";
+                                    
+                                }
+                            }
+                            else {
+                                html_text += "<td>" + RowElement[k].innerHTML.trim() + "</td>";
+                            }
+                        } //else
+                    } //for(k = 0; k < RowElement.length; k++)
+                    html_text += "</tr>";
+                } //for(i=0;i<Rows.length;i++)      
+                html_text += "</tbody>";
+                html_text += "</table>";
+                html_text += "</body></html>";
+            } //try
+            catch (e) {
+                html_text = "";
+                alert("Error in XML file: " + e);
+            }
+        } //function generateHTML(xmlDoc)
+        function viewXML(what) {
+            var URL = what.URL.value.trim();
+            if (URL == "") {
+                alert("Please input file name!");
+                return;
+            }
+
+            function loadXML(url) {
+                if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.open("GET", url, false);
+                
+                xmlhttp.send();
+                if(xmlhttp.status == 404){
+                    alert("File does not exist! ");
+                    return "1";
+
+            }
+                
+                xmlDoc = xmlhttp.responseXML;
+                return xmlDoc;
+            }
+            xmlDoc = loadXML(URL);
+            if (xmlDoc) {
+                //if (xmlDoc == null) alert("XML file does not exist");
+                if (xmlDoc === "1") return;
+                if (window.ActiveXObject) //if IE, simply execute script (due to async prop).
+                {
+                    if (xmlDoc.parseError.errorCode != 0) {
+                        var myErr = xmlDoc.parseError;
+                        generateError(xmlDoc);
+                        hWin = window.open("", "Error", "height=800,width=1000");
+                        hWin.document.write(html_text);
+                    }
+                    else {
+                        generateHTML(xmlDoc);
+                        hWin = window.open("", "Assignment4", "height=800,width=1000");
+                        hWin.document.write(html_text);
+                    }
+                } //if error 
+                else //else if FF, execute script once XML object has loaded
+                {
+                    xmlDoc.onload = generateHTML(xmlDoc);
+                    if (html_text != "") {
+                        hWin = window.open("", "Assignment4", "height=800,width=1000");
+                        hWin.document.write(html_text);
+                        hWin.document.close();
+                    }
+                }
+            } // if(xmlDoc) 
+            else{
+                alert("Error in XML file!");
+            }
+        } //function viewXML(what)
+    </script>
+</head>
+
+<body>
+    <div style="margin-left:25%;margin-top:150px; width:600px;">
+    <h1 align="center" >Enter URL for Airlines List XML File</h1>
+    <form name="myform" method="POST" id="location">
+        <input style="margin-left:150px;" type="text" name="URL" size="45" onkeypress="if(event.keyCode==13){viewXML(this.form); event.preventDefault()}" />
+        <br />
+        <input type="button" id="Submit" class="Burron" name="submit" value="Submit Query" onClick="viewXML(this.form)" /> </form>
+    </div>
+    <noscript>
+</body>
+
+</html>
