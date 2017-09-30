@@ -51,6 +51,7 @@ Created a webpage that allows you to search for informationabout a set of Facebo
 # <a name = "responsive-web-design"></a>Responsive Web Design
 
 🐌 [Source Code](https://github.com/BiruLyu/Facebook-Search/tree/master/04.Facebook%20Graph%20Search)
+
 👉🏻 **Youtube** :  https://www.youtube.com/watch?v=jFei-CCluAw
 
 Created a webpage that allows users to query aboutusers, pages, groups, events and places. A PHP script is deployed on Google Cloud App Engine to return a JSON formatted datastream to the front-end. The client parses the JSON data and renders it in a nicer-looking, responsive UI(using Bootstrap).
@@ -63,6 +64,7 @@ Created a webpage that allows users to query aboutusers, pages, groups, events a
 # <a name = "good-looking-ios-app"></a> Good-looking iOS App
 
 🐌 [Source Code](https://github.com/BiruLyu/Facebook-Search/tree/master/05.FB%20Search)
+
 👉🏻 **Youtube** :  https://www.youtube.com/watch?v=L-pA_FdJy6s
 
 In this part, I developed an iOS Mobile application, which will have following functionality:
