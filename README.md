@@ -32,7 +32,7 @@ A HTML/JavaScript program, which takes the URLof an XML document containing US A
 
 ![](https://ws2.sinaimg.cn/large/006tNc79gy1fk24zgakc3j31kw0tzmzs.jpg)
 
-![](https://ws3.sinaimg.cn/large/006tNc79gy1fk24wj8h4bj31kw0rmgxo.jpg)
+![](![](https://ws2.sinaimg.cn/large/006tNc79gy1fk2762ewcfj31kw0tvgys.jpg)
 
  http://www-scf.usc.edu/~blyu/CSCI571/HW4/file2.html
 
