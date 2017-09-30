@@ -67,7 +67,7 @@ Created a webpage that allows users to query aboutusers, pages, groups, events a
 
 👉🏻 **Youtube** :  https://www.youtube.com/watch?v=L-pA_FdJy6s
 
-In this part, I developed an iOS Mobile application, which will have following functionality:
+In this part, I developed an iOS Mobile application, which have following functionality:
 
 + Home screen and a slide out-menu which will provide access to the different screens such as Home,Favorites and About Me. 
 + Search Results
