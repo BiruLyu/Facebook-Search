@@ -20,7 +20,7 @@ This repository is for **CSCI571 Web Technologies** Homework, incloud :
 
 Imitated a web page directly in HTML and CSS. Snapshots of the web page is as follow : 
 
-![](https://ws1.sinaimg.cn/large/006tNc79gy1fk2wmewxthj31kw1gh11g.jpg)
+![screencapture-www-scf-usc-edu-blyu-csci571-hw3-file1-html-1506852409048](https://user-images.githubusercontent.com/22584778/31053589-d5a97bde-a655-11e7-8c60-a315b4611cbf.png)
 
 http://www-scf.usc.edu/~blyu/CSCI571/HW3/file1.html
 
