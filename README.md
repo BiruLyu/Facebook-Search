@@ -42,7 +42,7 @@ A HTML/JavaScript program, which takes the URLof an XML document containing US A
 
 👉🏻 **Youtube** :  https://youtu.be/tWu2b3324Bk
 
-Created a webpage that allows you to search for informationabout a set of Facebook entities (i.e., users, pages, events, places, and groups) using theFacebook Graph API, and the results will be displayed in a tabular format.
+Created a webpage that allows you to search for information about a set of Facebook entities (i.e., users, pages, events, places, and groups) using the Facebook Graph API, and the results will be displayed in a tabular format.
 
 ![](https://ws3.sinaimg.cn/large/006tNc79gy1fk253sl1qvj31kw0tz774.jpg)
 
@@ -74,6 +74,7 @@ In this part, I developed an iOS Mobile application, which have following functi
 + Different Tabs for Users, Pages, Events, Places and Groups with Pagination
 + Detail Pages with Albums and Posts tabs 
 + Mark Favorites and Facebook Share - social networking features using the Facebook SDK
+  > The Share dialog gives people the ability to publish an individual story to their timeline, a friend's timeline, a group, or in a private message on Messenger. This does not require Facebook Login or any extended permissions, so it is the easiest way to enable sharing on the web.
 
 ![](https://ws1.sinaimg.cn/large/006tNc79gy1fk267tojm9j31kw0rs11q.jpg)
 
